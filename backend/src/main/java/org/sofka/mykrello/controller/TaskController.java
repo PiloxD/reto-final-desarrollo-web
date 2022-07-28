@@ -32,9 +32,9 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/api/v1/task")
-    public ResponseEntity<MyResponseUtility> create(@RequestBody TaskDomain task) {
-        response.data = taskService.create(task);
+    @PostMapping(path = "/api/v1/task/{idBoard}")
+    public ResponseEntity<MyResponseUtility> create(@RequestBody TaskDomain task, @PathVariable(value = "idBoard")Integer idBoard) {
+        response.data = taskService.create(task, idBoard);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -45,10 +45,10 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    /*@DeleteMapping(path = "/api/v1/task/{id}")
+    @DeleteMapping(path = "/api/v1/task/{id}")
     public ResponseEntity<MyResponseUtility> delete(@PathVariable(value = "id") Integer id) {
         response.data = taskService.delete(id);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-*/
+
 }

@@ -38,13 +38,14 @@ public class TaskService implements TaskServiceInterface {
     }
 
     @Override
-    public TaskDomain create(TaskDomain task) {
-        task.setIdBoard(1);
+    public TaskDomain create(TaskDomain task, Integer idBoard) {
+        task.setIdBoard(idBoard);
         task.setIdColumn(1);
         //Create column
-
+        var log = new LogDomain();
         var newTask = taskRepository.save(task);
-
+        log.setIdTasks(newTask);
+        logService.create(log);
         return newTask;
     }
 
