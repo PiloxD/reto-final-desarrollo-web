@@ -46,6 +46,7 @@ public class BoardController {
     @PutMapping(path = "/api/v1/board/{id}")
     public ResponseEntity<MyResponseUtility> put(@PathVariable(value = "id") Integer id,
             @RequestBody BoardDomain board) {
+        System.out.println(board + ":D Aqui");
         response.data = boardService.update(id, board);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }

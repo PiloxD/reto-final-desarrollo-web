@@ -1,6 +1,7 @@
 package org.sofka.mykrello.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.time.Instant;
 @Data
 @Entity
 @Table(name = "krl_log")
+//@JsonIgnoreProperties(value = {"idTasks","previous", "current"}, allowGetters = true)
 public class LogDomain implements Serializable {
 
     private static final long serialVersionUID = 1L;

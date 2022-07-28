@@ -1,6 +1,7 @@
 package org.sofka.mykrello.model.service;
 
-import java.util.Collections;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.sofka.mykrello.model.repository.TaskRepository;
 import org.sofka.mykrello.model.service.interfaces.TaskServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class TaskService implements TaskServiceInterface {
@@ -21,34 +23,54 @@ public class TaskService implements TaskServiceInterface {
     @Autowired
     private TaskRepository taskRepository;
 
-    @Override
+    /*@Override
+    @Transactional(readOnly = true)
     public List<TaskDomain> findAllTasksById(Integer idBoard) {
         return taskRepository.findAllById(Collections.singleton(idBoard));
-    }
+    }*/
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<TaskDomain> findById(Integer id) {
-        return taskRepository.findById(id);
+        var task = taskRepository.findById(id);
+        return task.isPresent() ? Optional.of(task.get()) : null;
+
     }
 
     @Override
     public TaskDomain create(TaskDomain task) {
-        var newTask = taskRepository.save(task);
-        LogDomain newLog = new LogDomain();
-        ColumnDomain newColumn = new ColumnDomain();
+        task.setIdBoard(1);
+        task.setIdColumn(1);
+        //Create column
 
-        newColumn.setId(1);
-        newLog.setCurrent(newColumn);
-        newLog.setPrevious(newColumn);
-        newLog.setIdTasks(newTask);
-        logService.create(newLog);
+        var newTask = taskRepository.save(task);
+
         return newTask;
     }
 
     @Override
     public TaskDomain update(Integer id, TaskDomain task) {
+        var oldTasks = taskRepository.findById(id).get();
         task.setId(id);
-        return taskRepository.save(task);
+
+        if (task.getName() != null){
+            String name  = task.getName();
+            oldTasks.setName(name);
+        }
+
+        if (task.getDescription() != null){
+            String description  = task.getDescription();
+            oldTasks.setDescription(description);
+        }
+
+        if (task.getDeliveryDate() != null){
+            Instant deliveryDate  = task.getDeliveryDate();
+            oldTasks.setDeliveryDate(deliveryDate);
+        }
+
+        oldTasks.setUpdatedAt(Instant.now());
+
+        return  taskRepository.save(oldTasks);
     }
 
     @Override
