@@ -40,6 +40,7 @@ public class BoardService implements BoardServiceInterface {
     @Override
     @Transactional
     public BoardDomain create(BoardDomain board) {
+        board.preUpdate();
         var newBoard = boardRepository.save(board);
         var columns = columnRepository.findAll();
         if (!columns.isEmpty()) {

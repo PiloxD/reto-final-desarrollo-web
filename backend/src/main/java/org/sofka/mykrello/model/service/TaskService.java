@@ -1,8 +1,13 @@
 package org.sofka.mykrello.model.service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+import org.sofka.mykrello.model.domain.ColumnDomain;
+import org.sofka.mykrello.model.domain.LogDomain;
 import org.sofka.mykrello.model.domain.TaskDomain;
+import org.sofka.mykrello.model.repository.TaskRepository;
 import org.sofka.mykrello.model.service.interfaces.TaskServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,33 +18,46 @@ public class TaskService implements TaskServiceInterface {
     @Autowired
     private LogService logService;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
     @Override
     public List<TaskDomain> findAllTasksById(Integer idBoard) {
-        // TODO Auto-generated method stub
-        return null;
+        return taskRepository.findAllById(Collections.singleton(idBoard));
     }
 
     @Override
-    public TaskDomain findById(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+    public Optional<TaskDomain> findById(Integer id) {
+        return taskRepository.findById(id);
     }
 
     @Override
     public TaskDomain create(TaskDomain task) {
-        // TODO Auto-generated method stub
-        return null;
+        var newTask = taskRepository.save(task);
+        LogDomain newLog = new LogDomain();
+        ColumnDomain newColumn = new ColumnDomain();
+
+        newColumn.setId(1);
+        newLog.setCurrent(newColumn);
+        newLog.setPrevious(newColumn);
+        newLog.setIdTasks(newTask);
+        logService.create(newLog);
+        return newTask;
     }
 
     @Override
     public TaskDomain update(Integer id, TaskDomain task) {
-        // TODO Auto-generated method stub
-        return null;
+        task.setId(id);
+        return taskRepository.save(task);
     }
 
     @Override
     public TaskDomain delete(Integer id) {
-        // TODO Auto-generated method stub
+        var optionalTask = taskRepository.findById(id);
+        if (optionalTask != null){
+            var task = optionalTask.get();
+            taskRepository.delete(task);
+        }
         return null;
     }
 }
