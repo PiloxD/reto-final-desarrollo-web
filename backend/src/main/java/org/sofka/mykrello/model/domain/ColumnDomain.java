@@ -5,17 +5,9 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.PreUpdate;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
@@ -48,15 +40,22 @@ public class ColumnDomain implements Serializable {
     private Instant updatedAt;
 
     @OneToMany(fetch = FetchType.LAZY, targetEntity = LogDomain.class, cascade = CascadeType.ALL, mappedBy = "previous")
+    @Transient
     @JsonManagedReference(value = "logPrevious")
     private List<LogDomain> logPrevious = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, targetEntity = LogDomain.class, cascade = CascadeType.ALL, mappedBy = "current")
+    @Transient
     @JsonManagedReference(value = "logCurrent")
     private List<LogDomain> logCurrent = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, targetEntity = ColumnForBoardDomain.class, cascade = CascadeType.ALL, mappedBy = "column")
-    @JsonManagedReference(value = "columnForBoards")
+    @JsonBackReference(value = "column-columnForBoard")
     private List<ColumnForBoardDomain> columnForBoards = new ArrayList<>();
+
+
+    @OneToMany(targetEntity = TaskDomain.class,fetch = FetchType.EAGER, mappedBy = "column")
+    @JsonManagedReference(value = "task_column")
+    private List<TaskDomain> tasks = new ArrayList<>();
 
 }

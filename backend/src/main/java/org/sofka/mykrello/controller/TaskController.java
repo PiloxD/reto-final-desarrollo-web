@@ -29,8 +29,8 @@ public class TaskController {
         response.data = taskService.findById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-    /*@PostMapping(path = "/api/v1/task")
+/*
+    @PostMapping(path = "/api/v1/task")
     public ResponseEntity<MyResponseUtility> create(@RequestBody BoardDomain board) {
         response.data = taskService.create(board);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
@@ -47,6 +47,6 @@ public class TaskController {
     public ResponseEntity<MyResponseUtility> delete(@PathVariable(value = "id") Integer id) {
         response.data = taskService.delete(id);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
-    }*/
-
+    }
+*/
 }

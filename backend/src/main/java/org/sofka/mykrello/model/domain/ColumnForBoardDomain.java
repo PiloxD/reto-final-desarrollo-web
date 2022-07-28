@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 @Data
@@ -37,14 +38,16 @@ public class ColumnForBoardDomain implements Serializable {
     @Column(name = "cfb_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = BoardDomain.class, optional = false, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = BoardDomain.class, optional = false,
+            cascade = CascadeType.DETACH)
     @JoinColumn(name = "brd_id_board", nullable = false)
     @JsonBackReference(value = "columnsForBoard")
     private BoardDomain board;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = ColumnDomain.class, optional = false, cascade = CascadeType.DETACH)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = ColumnDomain.class, optional = false,
+            cascade = CascadeType.DETACH)
     @JoinColumn(name = "clm_id_column", nullable = false)
-    @JsonBackReference(value = "columnForBoards")
+    @JsonManagedReference(value = "column-columnForBoard")
     private ColumnDomain column;
 
     @Column(name = "cfb_created_at", nullable = false, updatable = false)
