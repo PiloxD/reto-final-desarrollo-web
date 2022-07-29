@@ -52,9 +52,13 @@ public class TaskDomain implements Serializable {
     @JsonManagedReference(value = "logForTasks")
     private List<LogDomain> logForTask = new ArrayList<>();
 
-
     @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JsonBackReference("task_column")
     @JoinColumn(name = "clm_id_column", referencedColumnName = "clm_id", nullable = false, updatable = false, insertable = false)
     private ColumnDomain column;
+
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @JsonBackReference("tasksForBoard")
+    @JoinColumn(name = "brd_id_board", referencedColumnName = "brd_id", nullable = false, updatable = false, insertable = false)
+    private BoardDomain boardId;
 }

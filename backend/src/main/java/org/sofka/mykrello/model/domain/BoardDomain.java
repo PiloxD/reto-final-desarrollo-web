@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -53,5 +54,9 @@ public class BoardDomain implements Serializable {
     @JsonManagedReference(value = "columnsForBoard")
     private List<ColumnForBoardDomain> columnsForBoard = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, targetEntity = TaskDomain.class, cascade = CascadeType.ALL, mappedBy = "boardId")
+    @JsonBackReference(value = "tasksForBoard")
+    private List<TaskDomain> tasksForBoard = new ArrayList<>();
 
 }
