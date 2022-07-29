@@ -53,30 +53,30 @@ public class TaskService implements TaskServiceInterface {
         var oldTasks = taskRepository.findById(id).get();
         task.setId(id);
 
-        if (task.getName() != null){
-            String name  = task.getName();
+        if (task.getName() != null) {
+            String name = task.getName();
             oldTasks.setName(name);
         }
 
-        if (task.getDescription() != null){
-            String description  = task.getDescription();
+        if (task.getDescription() != null) {
+            String description = task.getDescription();
             oldTasks.setDescription(description);
         }
 
-        if (task.getDeliveryDate() != null){
-            Instant deliveryDate  = task.getDeliveryDate();
+        if (task.getDeliveryDate() != null) {
+            Instant deliveryDate = task.getDeliveryDate();
             oldTasks.setDeliveryDate(deliveryDate);
         }
 
         oldTasks.setUpdatedAt(Instant.now());
 
-        return  taskRepository.save(oldTasks);
+        return taskRepository.save(oldTasks);
     }
 
     @Override
     public TaskDomain delete(Integer id) {
         var optionalTask = taskRepository.findById(id);
-        if (optionalTask != null){
+        if (optionalTask != null) {
             var task = optionalTask.get();
             taskRepository.delete(task);
         }
@@ -86,14 +86,19 @@ public class TaskService implements TaskServiceInterface {
     @Override
     public TaskDomain moveToColumn(Integer idColumn, Integer idTask) {
         var targetTask = taskRepository.findById(idTask);
-        if (targetTask != null){
+        if (targetTask != null) {
             var task = targetTask.get();
+            Integer previousColumn = task.getIdColumn();
             task.setIdColumn(idColumn);
-            taskRepository.save(task);
+            TaskDomain taskUpdate = taskRepository.save(task);
+
+            LogDomain newLog = new LogDomain();
+            newLog.setIdTasks(taskUpdate);
+            newLog.setIdClmPrevious(previousColumn);
+            newLog.setIdClmCurrent(idColumn);
+            logService.create(newLog);
             return task;
         }
         return null;
     }
-
-
 }
