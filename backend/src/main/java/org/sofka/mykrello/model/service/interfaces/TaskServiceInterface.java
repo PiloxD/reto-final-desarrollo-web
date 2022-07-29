@@ -10,4 +10,5 @@ public interface TaskServiceInterface {
     public TaskDomain create(TaskDomain task, Integer idBoard);
     public TaskDomain update(Integer id, TaskDomain task);
     public TaskDomain delete(Integer id);
+    public TaskDomain moveToColumn(Integer idColumn, Integer idTask);
 }

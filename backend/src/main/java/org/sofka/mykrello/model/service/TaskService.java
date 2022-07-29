@@ -41,7 +41,6 @@ public class TaskService implements TaskServiceInterface {
     public TaskDomain create(TaskDomain task, Integer idBoard) {
         task.setIdBoard(idBoard);
         task.setIdColumn(1);
-        //Create column
         var log = new LogDomain();
         var newTask = taskRepository.save(task);
         log.setIdTasks(newTask);
@@ -83,4 +82,18 @@ public class TaskService implements TaskServiceInterface {
         }
         return null;
     }
+
+    @Override
+    public TaskDomain moveToColumn(Integer idColumn, Integer idTask) {
+        var targetTask = taskRepository.findById(idTask);
+        if (targetTask != null){
+            var task = targetTask.get();
+            task.setIdColumn(idColumn);
+            taskRepository.save(task);
+            return task;
+        }
+        return null;
+    }
+
+
 }
