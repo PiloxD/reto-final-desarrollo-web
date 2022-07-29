@@ -2,22 +2,25 @@
 
 import { BoardService } from "../model/services/board.service.mjs";
 import { IndexView } from "../view/index.view.mjs"
+import { ListBoard } from "../model/listBoard.mjs";
 
 class IndexController {
     #indexView;
     #allBoards;
 
     constructor() {
-        this.#indexView = new IndexView()
-
+        this.#indexView = new IndexView();
     }
+
     async init() {
-        const data = new BoardService()
-        this.#allBoards = await data.getAllBoards()
-        console.log("All : ")
-        console.log("All boards: ", this.#allBoards)
+        const listBoard = new ListBoard();
+        const boardService = new BoardService();    
+        const response = await boardService.getAllBoards();
+        const data = response.data;     
+        this.#allBoards = listBoard.getList(data);        
+        this.#indexView.init(this.#allBoards);                
     }
 }
 
-export const indexController = new IndexController();
-indexController.init()
+export const index = new IndexController();
+index.init();

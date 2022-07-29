@@ -2,57 +2,51 @@ import { Config } from '../../config.mjs'
 import { BoardModel } from '../board.model.mjs'
 
 export class BoardService {
-    constructor() {
-    }
-
+    
     // GET Traer todos los tableros
-    getAllBoards = axios.get(`${Config.API_URL}boards`)
-        .then(response => {
-            console.log("response: ",response)
-            return response.json()
-        })
-        .catch(e => {
-            console.log(e);
-        })
-
+    getAllBoards() {
+        return fetch(`${Config.API_URL}boards`)
+        .then(response => response.json()); 
+        
+    }
     // // GET Traer un tablero por su ID
-    // getBoardById = axios.get(`${Config.API_URL}board/${id}`)
-    //     .then(response => {
-    //         console.log(response)
-    //     })
-    //     .catch(e => {
-    //         console.log(e);
-    //     })
+    getBoardById(){
+        return fetch(`${Config.API_URL}board/${id}`)
+        .then(response => response.json());        
+    } 
 
-    // // POST Crear un tablero nuevo
-    // createBoard = axios.post(`${Config.API_URL}board`, BoardModel)
-    //     .then(function (response) {
-    //         console.log(response);
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
+    // POST Crear un tablero nuevo
+    createBoard(){
+        return fetch(`${Config.API_URL}board`, {
+            method: 'POST',
+            body: JSON.stringify(BoardModel),
+            headers: {
+                'Content-Type': 'application/json'                
+            }
+        })
+    } 
 
-    // // PUT Actualizar nombre de un tablero 
-    // updateBoardName = axios.put(`${Config.API_URL}board/${id}`, BoardModel)
-    //     .then(function (response) {
-    //         console.log(response);
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
-
-    // // DELETE Elimina un tablero por su ID 
-    // deleteBoardById = axios.delete(`${Config.API_URL}board/${id}`)
-    //     .then(function (response) {
-    //         console.log(response);
-    //     })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
-
-
-
+    // PUT Actualizar nombre de un tablero 
+    updateBoardName(){
+        return fetch(`${Config.API_URL}board/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(BoardModel),
+            headers: {
+                'Content-Type': 'application/json'                
+            }
+        })
+    }
+    // DELETE Elimina un tablero por su ID 
+    deleteBoardById = (id) =>{
+        axios.delete(`${Config.API_URL}board/${id}`)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    } 
+    
 }
 
 
