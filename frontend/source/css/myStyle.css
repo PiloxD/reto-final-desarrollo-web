@@ -1,3 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Poppins:wght@500;700&display=swap');
+:root{
+  --text-color: rgb(79, 79, 79);
+}
+
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html{
+  font-size: 62.5%;
+}
+
+body {
+  background-color: #e0eafc;
+  font-family: 'Mulish', sans-serif;
+}
+/*navbar*/
+.nav{
+  padding: 20px 30px; 
+}
+
+.logo-container{
+  height: 50px;
+  padding: 1.5rem;  
+  align-self: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;    
+  background: #e0eafc;
+  box-shadow: 7px 7px 14px #d0daea,
+  -7px -7px 14px #f0faff;
+
+}
+
+.logo-container h3{
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+.logo-container > a{
+  
+  background: #79bde0; 
+  background: -webkit-linear-gradient(to right, #79bde0, #dd41fd); 
+  background: linear-gradient(to right, #79bde0, #dd41fd); 
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+}
+/*cardBoard*/
+main{
+  height: calc(100vh - 120px);
+  margin: 0 20px;
+  padding: 40px 0px;  
+  outline: none;
+  background: #e0eafc;
+  box-shadow: inset 29px 29px 58px #d0daea,
+              inset -29px -29px 58px #f0faff;
+  border-radius: 1.5rem;
+}
+
+.info-container{
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.title-container{
+  font-size: 5rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  margin-left: 8rem;
+  margin-bottom: 50px;
+  background: #79bde0; 
+  background: -webkit-linear-gradient(to right, #79bde0, #dd41fd); 
+  background: linear-gradient(to right, #79bde0, #dd41fd); 
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  
+}
+
+.card-board-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+.card-board{
+  width: 70%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  border-radius: 1.3rem;
+  background: #e0eafc;
+  box-shadow:  29px 29px 58px #d0daea,
+              -29px -29px 58px #f0faff;
+}
+
+.card-board:hover{
+  transform: scale(1.1);
+}
+
+.card-board:focus{
+  outline: none;
+  background: #e0eafc;
+  box-shadow: inset 29px 29px 58px #d0daea,
+              inset -29px -29px 58px #f0faff;
+}
+
+.indicator{
+  width: 100%;
+  height: 10%;
+  border-top-left-radius: 1.3rem;
+  border-top-right-radius: 1.3rem;
+  background-color: #79bde0;
+  background: rgb(121,189,224);
+  background: linear-gradient(27deg, rgba(121,189,224,1) 0%, rgba(221,65,253,1) 100%);
+}
+
+.card-body{
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-title{
+  font-size: 2.5rem;
+  font-weight:500;
+  color: var(--text-color);
+  text-transform: uppercase;
+
+}
+
+.buttons-container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.actios-boards-buttons{
+  text-align: -webkit-center;
+  height: calc(100vh - 300px);
+}
+
+.action-button{
+  margin-bottom: 8rem;
+}
+
+.delete-button{
+  width: 70%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 1.3rem;
+  margin-top: 8rem;
+  background: #e0eafc;
+  box-shadow:  29px 29px 58px #d0daea,
+              -29px -29px 58px #f0faff;
+}
+
+.create-button{
+  width: 70%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.3rem;
+  border: none;
+  background: #e0eafc;
+  box-shadow:  29px 29px 58px #d0daea,
+              -29px -29px 58px #f0faff;
+}
+
+.create-button:hover{
+  background: linear-gradient(145deg, #cad3e3, #f0faff);
+  box-shadow:  29px 29px 58px #d0daea,
+              -29px -29px 58px #f0faff;
+}
+
+.create-button:focus{
+  outline: none;
+  background: #e0eafc;
+  box-shadow: inset 29px 29px 58px #d0daea,
+              inset -29px -29px 58px #f0faff;
+              
+}
+
+span{
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+i{
+  font-size: xx-large;
+  background: #79bde0; 
+  background: -webkit-linear-gradient(to right, #79bde0, #dd41fd); 
+  background: linear-gradient(to right, #79bde0, #dd41fd); 
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/*board*/
 .container {
   width: 1300px;
   border: 1px solid #c3c3c3;

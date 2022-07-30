@@ -12,13 +12,17 @@ export class Navbar {
 
     #privateGenerateNavbar() {
         const nav = document.createElement('nav');
-        nav.classList.add('navbar', 'navbar-expand-lg', 'bg-light');
-
+        nav.classList.add('nav');
         const div = document.createElement('div');
-        div.classList.add('container-fluid');
-
+        div.classList.add('logo-container');
+        div.innerHTML = `
+            <a href="../../../../source/index.html" class="ancor-logo">
+                <h3>Krell&#128521;</h3>
+            </a>
+        `;
         nav.appendChild(div);
 
         this.#privateNavbar = nav;
     }
+    
 }

@@ -12,6 +12,7 @@ export class BoardView{
         this.clearView(); 
         const newBoard = new IntoBoard(board);
         newBoard.showBoard();
+        
     }
 
     clearView() {

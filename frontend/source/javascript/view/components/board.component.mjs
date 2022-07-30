@@ -11,19 +11,19 @@ export class Board {
     // }
 
     showCardBoard( changeView ) {        
-        const $mainContainer = document.querySelector('#container');
+        const $boardContainer = document.querySelector('#board-container');
         const $buttonBoard = document.createElement('button');
         $buttonBoard.addEventListener('click', () => changeView(this.#id));
         $buttonBoard.id = this.#id;
         $buttonBoard.type = 'button';
-        $buttonBoard.classList.add('card');
-        $buttonBoard.style = "width: 18rem;";
+        $buttonBoard.classList.add('card-board');
 
-        $mainContainer.append($buttonBoard);
+        $boardContainer.append($buttonBoard);
 
         $buttonBoard.innerHTML = `
+            <div class="indicator"></div>
             <div class="card-body">
-            <h5 class="card-title">${this.#name}</h5>
+                <h5 class="card-title">${this.#name}</h5>
             </div>
         `
     }

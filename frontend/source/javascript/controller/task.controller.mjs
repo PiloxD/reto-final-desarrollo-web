@@ -9,7 +9,8 @@ export class TaskController{
         const taskService = new TaskService();
         const response = await taskService.getTasksForBoard(idBoard);
         const data = response.data;  
-        console.log(data);      
+        console.log(data);
+
         // const {name} = data;
         // const newBoard = new BoardModel(id, name);                
         // this.#boarView.init(newBoard);                  
