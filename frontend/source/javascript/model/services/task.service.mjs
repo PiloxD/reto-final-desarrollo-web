@@ -1,3 +1,3 @@
-const axios = require('axios').default;
-
-axios.get(``)
+export class TaskService {
+    
+}
