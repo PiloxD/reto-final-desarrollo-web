@@ -1,5 +1,6 @@
 package org.sofka.mykrello.model.service.interfaces;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.sofka.mykrello.model.domain.TaskDomain;
@@ -11,4 +12,5 @@ public interface TaskServiceInterface {
     public TaskDomain update(Integer id, TaskDomain task);
     public TaskDomain delete(Integer id);
     public TaskDomain moveToColumn(Integer idColumn, Integer idTask);
+    public List<TaskDomain> findAllTasksById(Integer idBoard);
 }

@@ -29,6 +29,11 @@ public class TaskService implements TaskServiceInterface {
         return taskRepository.findAllById(Collections.singleton(idBoard));
     }*/
 
+    @Transactional(readOnly = true)
+    public List<TaskDomain> findAllTasksById(Integer idBoard) {
+        return taskRepository.getTasksByBoard(idBoard);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<TaskDomain> findById(Integer id) {
