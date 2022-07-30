@@ -10,7 +10,7 @@ export class BoardService {
         
     }
     // // GET Traer un tablero por su ID
-    getBoardById(){
+    getBoardById(id){
         return fetch(`${Config.API_URL}board/${id}`)
         .then(response => response.json());        
     } 
