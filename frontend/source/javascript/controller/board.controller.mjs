@@ -4,10 +4,11 @@ import { BoardModel } from "../model/board.model.mjs";
 
 export class BoardController{
     #boarView;
-    #board;
+    #nameBoard;
 
     constructor() {
         this.#boarView = new BoardView();
+        this.#nameBoard = "dsafs";
     }
 
     async getBoard(id) {
@@ -26,7 +27,34 @@ export class BoardController{
         boardService.deleteBoardById(boardToDelete);
     }
 
-    createBoard() {
-        boardService.createBoard(boardToDelete);
+    captureInfoBoard(id, operation){
+        const boardService = new BoardService();
+        Swal.fire({
+            title: 'Titulo del tablero',
+            input: 'text',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Crear',
+            showLoaderOnConfirm: true,
+            preConfirm: (name) => {             
+                if (name !== "") {
+                    if (operation === "create") {                         
+                        boardService.createBoard(name);                                            
+                    }else{
+                        boardService.updateBoardName(id, name);
+                    }
+                }else{
+                    Swal.showValidationMessage(
+                        "Ingrese un nombre valido"
+                    )
+                }
+            },
+        })    
     }
+
+    
+
+   
 }

@@ -16,21 +16,32 @@ export class BoardService {
     } 
 
     // POST Crear un tablero nuevo
-    createBoard(){
-        return fetch(`${Config.API_URL}board`, {
+    createBoard(nameBoard){        
+        fetch(`${Config.API_URL}board`, {
             method: 'POST',
-            body: JSON.stringify(BoardModel),
+            body: JSON.stringify(
+                {
+                    "name": `${nameBoard}`,
+                }
+            ),
             headers: {
                 'Content-Type': 'application/json'                
             }
         })
+        .then(response => console.log(response))
+        .catch(err => console.error(err)); 
+
     } 
 
     // PUT Actualizar nombre de un tablero 
-    updateBoardName(){
+    updateBoardName(id, nameBoard){
         return fetch(`${Config.API_URL}board/${id}`, {
             method: 'PUT',
-            body: JSON.stringify(BoardModel),
+            body: JSON.stringify(
+                {
+                    "name": `${nameBoard}`,
+                }
+            ),
             headers: {
                 'Content-Type': 'application/json'                
             }

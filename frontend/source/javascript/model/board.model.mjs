@@ -7,6 +7,7 @@ export class BoardModel {
         this.#name = name;   
     }
 
+
     getName(){ return this.#name; }
 
     getId(){ return this.#boardId; }
