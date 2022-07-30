@@ -105,6 +105,20 @@ main{
   box-shadow:  29px 29px 58px #d0daea,
               -29px -29px 58px #f0faff;
 }
+.card-task{
+  width: 50%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: solid;
+  padding: auto;
+  border-radius: 1.3rem;
+  background: #e0eafc;
+  /* box-shadow:  29px 29px 58px #d0daea,
+              -29px -29px 58px #f0faff; */
+}
 
 .card-board:hover{
   transform: scale(1.1);

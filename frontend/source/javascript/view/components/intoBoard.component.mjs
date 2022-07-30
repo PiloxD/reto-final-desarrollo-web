@@ -1,11 +1,11 @@
-export class IntoBoard{
+export class IntoBoard {
     #board
 
     constructor(board) {
-        this.board = board; 
+        this.board = board;
     }
 
-    showBoard(){
+    showBoard() {
         const $mainContainer = document.querySelector('#container');
         $mainContainer.innerHTML = `
             <div class="board">${this.board.getName()}</div>

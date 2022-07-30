@@ -1,7 +1,7 @@
 export class Board {
     #name;
     #id;
-    constructor(name, id){
+    constructor(name, id) {
         this.#name = name;
         this.#id = id
     }
@@ -10,7 +10,7 @@ export class Board {
     //     console.log(this.#id);        
     // }
 
-    showCardBoard( changeView ) {        
+    showCardBoard(changeView) {
         const $boardContainer = document.querySelector('#board-container');
         const $buttonBoard = document.createElement('button');
         $buttonBoard.addEventListener('click', () => changeView(this.#id));
