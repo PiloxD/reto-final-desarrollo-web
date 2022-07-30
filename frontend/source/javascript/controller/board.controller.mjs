@@ -14,7 +14,6 @@ export class BoardController{
         const boardService = new BoardService();
         const response = await boardService.getBoardById(id);
         const data = response.data;  
-        console.log(data);      
         const {name} = data;
         const newBoard = new BoardModel(id, name);                
         this.#boarView.init(newBoard);                  

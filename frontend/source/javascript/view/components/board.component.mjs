@@ -1,13 +1,13 @@
 export class Board {
     #name;
     #id;
-    constructor(name, id){
+    constructor(name, id) {
         this.#name = name;
         this.#id = id
     }
 
 
-    showCardBoard( changeView ) {        
+    showCardBoard(changeView) {
         const $boardContainer = document.querySelector('#board-container');
         Sortable.create($boardContainer);
         const $buttonBoard = document.createElement('button');
