@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/** Clase para los servicios de los tableros
+ * @autor Andrés Díaz & Andrés Taborda
+ */
 @Service
 public class BoardService implements BoardServiceInterface {
 
@@ -24,12 +27,21 @@ public class BoardService implements BoardServiceInterface {
     @Autowired
     private ColumnForBoardRepository columnForBoardRepository;
 
+    /** Trae todos los tableros
+     * @autor Andrés Díaz & Andrés Taborda
+     * @return
+     */
     @Override
     @Transactional(readOnly = true)
     public List<BoardDomain> getAll() {
         return boardRepository.findAll();
     }
 
+    /** Trae un tablero por su ID
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param id Identificador del tablero
+     * @return
+     */
     @Override
     @Transactional(readOnly = true)
     public BoardDomain findById(Integer id) {
@@ -37,6 +49,11 @@ public class BoardService implements BoardServiceInterface {
         return board.isPresent() ? board.get() : null;
     }
 
+    /** Crear un tablero nuevo tablero con el nombre recibido como parametro
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param board Datos del tablero a crear
+     * @return tablero nuevo: newBoard
+     */
     @Override
     @Transactional
     public BoardDomain create(BoardDomain board) {
@@ -54,6 +71,12 @@ public class BoardService implements BoardServiceInterface {
         return newBoard;
     }
 
+    /** Actualiza el tablero con un nuevo nombre
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param id    Identificador del tablero a actualizar
+     * @param board Datos del tablero a actualizar
+     * @return
+     */
     @Override
     @Transactional
     public BoardDomain update(Integer id, BoardDomain board) {
@@ -61,6 +84,11 @@ public class BoardService implements BoardServiceInterface {
         return boardRepository.save(board);
     }
 
+    /** Elimina un tablero por su ID
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param id Identificador del tablero a borrar
+     * @return
+     */
     @Override
     @Transactional
     public BoardDomain delete(Integer id) {

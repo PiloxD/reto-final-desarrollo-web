@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/** Clase para los servicios de las tareas
+ * @autor Andrés Díaz & Andrés Taborda
+ */
 @Service
 public class TaskService implements TaskServiceInterface {
 
@@ -29,11 +32,21 @@ public class TaskService implements TaskServiceInterface {
         return taskRepository.findAllById(Collections.singleton(idBoard));
     }*/
 
+    /** Trae todas las tareas por el ID del tablero
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param idBoard
+     * @return
+     */
     @Transactional(readOnly = true)
     public List<TaskDomain> findAllTasksById(Integer idBoard) {
         return taskRepository.getTasksByBoard(idBoard);
     }
 
+    /** Trae una tarea por su ID
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param id
+     * @return
+     */
     @Override
     @Transactional(readOnly = true)
     public Optional<TaskDomain> findById(Integer id) {
@@ -42,6 +55,12 @@ public class TaskService implements TaskServiceInterface {
 
     }
 
+    /** Crea una nueva tarea en un tablero seleccionado por su ID
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param task
+     * @param idBoard
+     * @return
+     */
     @Override
     public TaskDomain create(TaskDomain task, Integer idBoard) {
         task.setIdBoard(idBoard);
@@ -53,6 +72,12 @@ public class TaskService implements TaskServiceInterface {
         return newTask;
     }
 
+    /** Actualiza una tarea por su ID
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param id
+     * @param task
+     * @return
+     */
     @Override
     public TaskDomain update(Integer id, TaskDomain task) {
         var oldTasks = taskRepository.findById(id).get();
@@ -78,6 +103,11 @@ public class TaskService implements TaskServiceInterface {
         return taskRepository.save(oldTasks);
     }
 
+    /** Elimina una tarea por su ID
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param id
+     * @return
+     */
     @Override
     public TaskDomain delete(Integer id) {
         var optionalTask = taskRepository.findById(id);
@@ -88,6 +118,12 @@ public class TaskService implements TaskServiceInterface {
         return null;
     }
 
+    /** Mueve una tarea a la columna seleccionada por sus ID y crea un nuevo registro
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param idColumn
+     * @param idTask
+     * @return
+     */
     @Override
     public TaskDomain moveToColumn(Integer idColumn, Integer idTask) {
         var targetTask = taskRepository.findById(idTask);

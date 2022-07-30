@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+/** Clase para el controlador de los tableros
+ * @autor Andrés Díaz & Andrés Taborda
+ */
 @RestController
 @CrossOrigin(value = "*")
 public class BoardController {
@@ -25,24 +28,44 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
+    /** Trae todos los tableros
+     * @autor Andrés Díaz & Andrés Taborda
+     * @return
+     */
     @GetMapping(path = "/api/v1/boards")
     public ResponseEntity<MyResponseUtility> index() {
         response.data = boardService.getAll();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /** Trae un tablero por su ID
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param id
+     * @return
+     */
     @GetMapping(path = "/api/v1/board/{id}")
     public ResponseEntity<MyResponseUtility> getBoardById(@PathVariable(value = "id") Integer id) {
         response.data = boardService.findById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /** Crea un tablero nuevo
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param board
+     * @return
+     */
     @PostMapping(path = "/api/v1/board")
     public ResponseEntity<MyResponseUtility> create(@RequestBody BoardDomain board) {
         response.data = boardService.create(board);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    /** Actualiza un tablero por su ID
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param id
+     * @param board
+     * @return
+     */
     @PutMapping(path = "/api/v1/board/{id}")
     public ResponseEntity<MyResponseUtility> put(@PathVariable(value = "id") Integer id,
             @RequestBody BoardDomain board) {
@@ -51,6 +74,11 @@ public class BoardController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    /** Elimina un tablero por su ID
+     * @autor Andrés Díaz & Andrés Taborda
+     * @param id
+     * @return
+     */
     @DeleteMapping(path = "/api/v1/board/{id}")
     public ResponseEntity<MyResponseUtility> delete(@PathVariable(value = "id") Integer id) {
         response.data = boardService.delete(id);
