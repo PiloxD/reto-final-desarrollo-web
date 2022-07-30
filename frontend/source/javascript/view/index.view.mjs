@@ -5,10 +5,10 @@ import { ActionsBoard } from "./components/actionsBoard.component.mjs";
 
 export class IndexView {
     #mainContainer;
-    #boardController;
+
     constructor() {
         this.#mainContainer = document.querySelector('#container');
-        this.#boardController =  new BoardController();
+        
     }
 
     init(boards) {
@@ -32,7 +32,7 @@ export class IndexView {
         boardController.getBoard(idBoard)  
     }
 
-    #createTemplate() {
+    #createTemplate() {        
         const navbar = new Navbar();
         const $nav = navbar.get();
         const $main = document.createElement('main');
@@ -61,7 +61,6 @@ export class IndexView {
 
     dragable(){
         const $list = document.querySelector("#board-container");
-        //Sortable.create($list);
     }
 }
 

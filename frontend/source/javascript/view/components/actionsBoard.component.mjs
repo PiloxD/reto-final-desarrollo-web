@@ -1,6 +1,6 @@
 import { BoardController } from "../../controller/board.controller.mjs";
 export class ActionsBoard {
-
+   
     constructor() {
         this.#privateGenerateButtons();
     }
@@ -21,8 +21,7 @@ export class ActionsBoard {
         $deleteButton.addEventListener('dragenter', this.dragEnter);
         $deleteButton.addEventListener('dragover', this.dragOver);
         $deleteButton.addEventListener('dragleave', this.dragleave);
-        $deleteButton.addEventListener('drop', this.drop);
-        
+        $deleteButton.addEventListener('drop', this.drop);        
 
         const $createButton = document.createElement('button');
         $createButton.innerHTML = `
@@ -30,7 +29,11 @@ export class ActionsBoard {
             <i class="bi bi-kanban-fill"></i>
         `;
         $createButton.classList.add('create-button');
-
+        const boardController = new BoardController();
+        $createButton.addEventListener('click', () => {
+            boardController.captureInfoBoard(null,"create")
+        });
+        
         $actions.append($createButton, $deleteButton);
         $actionsContainer.append($actions);
 

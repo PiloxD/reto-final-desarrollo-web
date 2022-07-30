@@ -14,7 +14,7 @@ export class BoardView {
         this.clearView();
         const newBoard = new IntoBoard(board);
         newBoard.showBoard();
-
+        
         const tasks = new TaskController()
         const tasksInColum = await tasks.getTasks(board.getId())
         console.log(tasksInColum)
