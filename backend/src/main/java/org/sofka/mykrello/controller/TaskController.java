@@ -20,11 +20,11 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    /*@GetMapping(path = "/api/v1/tasks/{id}")
-    public ResponseEntity<MyResponseUtility> getTasks(@PathVariable(value = "id") Integer id) {
+    @GetMapping(path = "/api/v1/tasks/{idBoard}")
+    public ResponseEntity<MyResponseUtility> getAllTaskById(@PathVariable(value = "idBoard") Integer id) {
         response.data = taskService.findAllTasksById(id);
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }*/
+    }
 
     @GetMapping(path = "/api/v1/task/{id}")
     public ResponseEntity<MyResponseUtility> getTaskById(@PathVariable(value = "id") Integer id) {
