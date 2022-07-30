@@ -7,11 +7,17 @@ export class TaskService {
     getAndMoveTask() {
         return fetch(`${Config.API_URL}taskMoveTo/${idTask}/${idColum}`)
             .then(response => response.json());
-
     }
+
     // // GET Traer una tarea por su ID
     getTaskById(id) {
         return fetch(`${Config.API_URL}task/${id}`)
+            .then(response => response.json());
+    }
+
+    // // GET Traer todas las tareas por tablero
+    getAllTaskByBoardId(idBoard) {
+        return fetch(`${Config.API_URL}tasks/${idBoard}`)
             .then(response => response.json());
     }
 

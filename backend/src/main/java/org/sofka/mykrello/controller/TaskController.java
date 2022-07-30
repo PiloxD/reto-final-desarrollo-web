@@ -45,7 +45,7 @@ public class TaskController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/api/v1/task/{id}?moveToColumn=2")
+    @PutMapping(path = "/api/v1/task/{id}")
     public ResponseEntity<MyResponseUtility> put(@PathVariable(value = "id") Integer id,
                                                  @RequestBody TaskDomain task) {
         response.data = taskService.update(id, task);

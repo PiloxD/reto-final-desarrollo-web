@@ -2,7 +2,7 @@
 
 import { BoardService } from "../model/services/board.service.mjs";
 import { IndexView } from "../view/index.view.mjs"
-import { ListBoard } from "../model/listBoard.mjs";
+import { ListBoard } from "../model/listBoard.model.mjs";
 
 class IndexController {
     #indexView;
