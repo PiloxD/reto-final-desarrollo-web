@@ -1,3 +1,4 @@
+import { BoardController } from "../../controller/board.controller.mjs";
 export class ActionsBoard {
 
     constructor() {
@@ -17,6 +18,11 @@ export class ActionsBoard {
             <span>Drag for Delete board</span>
             <i class="bi bi-trash-fill"></i>
         `;
+        $deleteButton.addEventListener('dragenter', this.dragEnter);
+        $deleteButton.addEventListener('dragover', this.dragOver);
+        $deleteButton.addEventListener('dragleave', this.dragleave);
+        $deleteButton.addEventListener('drop', this.drop);
+        
 
         const $createButton = document.createElement('button');
         $createButton.innerHTML = `
@@ -29,5 +35,53 @@ export class ActionsBoard {
         $actionsContainer.append($actions);
 
     }
+
+    dragEnter(e) {
+        e.preventDefault();
+    }
+    
+    dragOver(e) {
+        e.preventDefault();
+    }
+    
+    dragLeave(e) {
+        //Todo
+    }
+    
+    drop() {
+        const idBoard = JSON.parse(localStorage.getItem('id-board'));
+        Swal.fire({
+            title: '¿Desea eliminar el board?',
+            icon: 'warning',
+            confirmButtonText: 'Si mi teacher.',
+            showCloseButton:true,
+            cancelButtonText: 'Cancelar.',
+            
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                const boardController = new BoardController();
+                boardController.deleteBoard();
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                  
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully',
+                })
+            } 
+        })
+        
+    }
+
     
 }

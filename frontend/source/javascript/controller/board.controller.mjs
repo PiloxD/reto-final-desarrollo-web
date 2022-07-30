@@ -18,4 +18,15 @@ export class BoardController{
         const newBoard = new BoardModel(id, name);                
         this.#boarView.init(newBoard);                  
     }
+
+    deleteBoard() {
+        const id = localStorage.getItem("id-board");
+        const boardToDelete = JSON.parse(id);
+        const boardService = new BoardService();
+        boardService.deleteBoardById(boardToDelete);
+    }
+
+    createBoard() {
+        boardService.createBoard(boardToDelete);
+    }
 }

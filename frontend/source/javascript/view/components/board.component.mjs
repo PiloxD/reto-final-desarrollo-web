@@ -6,17 +6,16 @@ export class Board {
         this.#id = id
     }
 
-    // goToBoard(){  
-    //     console.log(this.#id);        
-    // }
 
     showCardBoard(changeView) {
         const $boardContainer = document.querySelector('#board-container');
+        Sortable.create($boardContainer);
         const $buttonBoard = document.createElement('button');
         $buttonBoard.addEventListener('click', () => changeView(this.#id));
         $buttonBoard.id = this.#id;
         $buttonBoard.type = 'button';
         $buttonBoard.classList.add('card-board');
+        $buttonBoard.addEventListener("dragstart", this.dragStart )
 
         $boardContainer.append($buttonBoard);
 
@@ -26,6 +25,11 @@ export class Board {
                 <h5 class="card-title">${this.#name}</h5>
             </div>
         `
+        
+    }
+
+    dragStart(e) {
+        localStorage.setItem('id-board', JSON.stringify(e.target.id));
     }
 
 }
