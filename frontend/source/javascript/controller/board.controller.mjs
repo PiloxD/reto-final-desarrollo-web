@@ -11,7 +11,6 @@ export class BoardController{
     }
 
     async getBoard(id) {
-        console.log(id);
         const boardService = new BoardService();
         const response = await boardService.getBoardById(id);
         const data = response.data;  
@@ -19,5 +18,16 @@ export class BoardController{
         const {name} = data;
         const newBoard = new BoardModel(id, name);                
         this.#boarView.init(newBoard);                  
+    }
+
+    deleteBoard() {
+        const id = localStorage.getItem("id-board");
+        const boardToDelete = JSON.parse(id);
+        const boardService = new BoardService();
+        boardService.deleteBoardById(boardToDelete);
+    }
+
+    createBoard() {
+        boardService.createBoard(boardToDelete);
     }
 }

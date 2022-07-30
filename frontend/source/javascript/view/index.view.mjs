@@ -5,10 +5,10 @@ import { ActionsBoard } from "./components/actionsBoard.component.mjs";
 
 export class IndexView{
     #mainContainer;
-
+    #boardController;
     constructor() {
         this.#mainContainer = document.querySelector('#container');
-        
+        this.#boardController =  new BoardController();
     }
     
     init(boards) {
@@ -19,16 +19,17 @@ export class IndexView{
             const boardId = board.getId();          
             const newBoard = new Board(name,boardId);
             newBoard.showCardBoard(this.changeView);
-        })              
+        });
+                  
     }
 
     #clearView() {
         this.#mainContainer.innerHTML = '';
     }
     
-    changeView(idBoard){        
+    changeView(idBoard){ 
         const boardController = new BoardController();
-        boardController.getBoard(idBoard);    
+        boardController.getBoard(idBoard)  
     }
 
     #createTemplate(){
@@ -50,12 +51,17 @@ export class IndexView{
 
         const $infoContainer =  document.createElement('div');
         $infoContainer.classList.add('info-container');
-        $infoContainer.append($cardsBoardContainer, $actiosBoards);
+        $infoContainer.append($cardsBoardContainer, $actiosBoards);        
 
         $main.append($title, $infoContainer);
         this.#mainContainer.append($nav,$main);
 
         const actionsButtons = new ActionsBoard();
     }
-    
+
+    dragable(){
+        const $list = document.querySelector("#board-container");
+        //Sortable.create($list);
+    }
 }
+
