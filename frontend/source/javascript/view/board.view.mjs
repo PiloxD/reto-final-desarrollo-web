@@ -17,25 +17,28 @@ export class BoardView {
 
         const tasks = new TaskController()
         const tasksInColum = await tasks.getTasks(board.getId())
-        //console.log(tasksInColum)
+        console.log("viendo.. ", tasksInColum)
 
         tasksInColum.map(task => {
             if (task.getIdColumn() === 1) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const newTask = new Task(taskdId, name);
+                const LogForTask = task.getLogForTask();
+                const newTask = new Task(taskdId, name, LogForTask);
                 newTask.showCardTask("#column1", this.changeViewInBoard);
 
             } else if (task.getIdColumn() === 2) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const newTask = new Task(taskdId, name);
+                const LogForTask = task.getLogForTask();
+                const newTask = new Task(taskdId, name, LogForTask);
                 newTask.showCardTask("#column2", this.changeViewInBoard);
             }
             else if (task.getIdColumn() === 3) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const newTask = new Task(taskdId, name);
+                const LogForTask = task.getLogForTask();
+                const newTask = new Task(taskdId, name, LogForTask);
                 newTask.showCardTask("#column3", this.changeViewInBoard);
             }
         })

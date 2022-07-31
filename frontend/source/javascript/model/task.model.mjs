@@ -21,5 +21,5 @@ export class TaskModel {
 
     getIdColumn() { return this.#idColumn; }
 
-    getLogs() { return this.#LogForTask; }
+    getLogForTask() { return this.#LogForTask; }
 }
