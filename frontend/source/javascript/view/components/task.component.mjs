@@ -25,8 +25,13 @@ export class Task {
             <div class="indicator"></div>
             <div class="card-body">
                 <h5 class="card-title">${this.#name}</h5>
-            </div>
+            </div>            
         `
+        if (this.#deliveryDate !== "" && this.#deliveryDate !== null) {
+            $buttonTask.innerHTML += `
+                <div class="delivery-date">Vence el: ${this.#deliveryDate}</div>
+            `
+        }
     }
 
     dragStart(e) {

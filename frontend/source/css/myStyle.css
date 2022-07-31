@@ -393,10 +393,46 @@ i{
 .modal-container{
   min-width: 600px;
   height: 50rem;
+  display: flex;
+  flex-direction: column;
   border-radius: 1.3rem;
   background: #e0e5ee;
   box-shadow:  16px 16px 32px #a3abb8,
-             -16px -16px 32px #b5bdcc
-  
+             -16px -16px 32px #b5bdcc ; 
+}
+
+.close-modal{
+  width: 6rem;
+  height: 6rem;
+  align-self: end;
+  margin: 1.5rem;
+  border: none;
+  border-radius: 50%;    
+  background: #e0eafc;
+  box-shadow: 7px 7px 14px #d0daea,
+             -7px -7px 14px #f0faff;             
+}
+
+.close-modal:focus{
+  outline: none;
+  background: linear-gradient(145deg, #cad3e3, #f0faff);
+  box-shadow:  29px 29px 58px #d0daea,
+              -29px -29px 58px #f0faff;
+}
+
+.form-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem;
+}
+
+.form-container > form{
+  width: 100%;
+}
+
+.delivery-date{
+  margin-bottom: 15px;
+  font-size: 1.3rem;
 }
 

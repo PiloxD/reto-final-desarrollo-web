@@ -1,6 +1,6 @@
 export class Modal {
 
-    showModal(){
+    showModal(component){
         const $container = document.querySelector("#container");
 
         const $overlay = document.createElement("div");
@@ -17,13 +17,13 @@ export class Modal {
         ` 
         closeButton.addEventListener("click", this.closeModal);
 
-        $modalContainer.append(closeButton);      
+        $modalContainer.append(closeButton, component);      
         $overlay.append($modalContainer);
         $container.append($overlay);
     }
 
     closeModal() {
-         document.querySelector(".overlay").remove();
+        document.querySelector(".overlay").remove();
     }
 
 }
