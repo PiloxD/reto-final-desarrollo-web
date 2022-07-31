@@ -50,9 +50,7 @@ export class TaskController {
             const fecha = `${mouth}/${day}/${year}`;
             newTask.deliveryDate = fecha;                        
             this.createTask(idBoard,newTask)
-        }else{  alert("Ingrese un nombre valido para su tarea"); }
-        
-
+        }else{  alert("Ingrese un nombre valido para su tarea"); }        
     }
 
     createTask(idBoard,newTask){

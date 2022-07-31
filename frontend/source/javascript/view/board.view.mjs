@@ -23,19 +23,22 @@ export class BoardView {
             if (task.getIdColumn() === 1) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const newTask = new Task(taskdId, name);
+                const deliveryDate = task.getDeliveryDate();
+                const newTask = new Task(taskdId, name, deliveryDate);
                 newTask.showCardTask("#column1", this.changeViewInBoard);
 
             } else if (task.getIdColumn() === 2) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const newTask = new Task(taskdId, name);
+                const deliveryDate = task.getDeliveryDate();
+                const newTask = new Task(taskdId, name, deliveryDate);
                 newTask.showCardTask("#column2", this.changeViewInBoard);
             }
             else if (task.getIdColumn() === 3) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const newTask = new Task(taskdId, name);
+                const deliveryDate = task.getDeliveryDate();
+                const newTask = new Task(taskdId, name, deliveryDate);
                 newTask.showCardTask("#column3", this.changeViewInBoard);
             }
 
