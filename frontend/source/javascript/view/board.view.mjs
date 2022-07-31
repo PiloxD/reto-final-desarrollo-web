@@ -17,35 +17,25 @@ export class BoardView {
 
         const tasks = new TaskController()
         const tasksInColum = await tasks.getTasks(board.getId())
-        console.log(tasksInColum)
+        //console.log(tasksInColum)
 
         tasksInColum.map(task => {
             if (task.getIdColumn() === 1) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const deliveryDate = task.getDeliveryDate();
-                const idColumn = task.getIdColumn();
-                const LogForTask = task.getLogs();
-                const newTask = new Task(taskdId, name, deliveryDate, idColumn, LogForTask);
+                const newTask = new Task(taskdId, name);
                 newTask.showCardTask("#column1", this.changeViewInBoard);
 
             } else if (task.getIdColumn() === 2) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const deliveryDate = task.getDeliveryDate();
-                const idColumn = task.getIdColumn();
-                const LogForTask = task.getLogs();
-                const newTask = new Task(taskdId, name, deliveryDate, idColumn, LogForTask);
+                const newTask = new Task(taskdId, name);
                 newTask.showCardTask("#column2", this.changeViewInBoard);
-                
             }
             else if (task.getIdColumn() === 3) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const deliveryDate = task.getDeliveryDate();
-                const idColumn = task.getIdColumn();
-                const LogForTask = task.getLogs();
-                const newTask = new Task(taskdId, name, deliveryDate, idColumn, LogForTask);
+                const newTask = new Task(taskdId, name);
                 newTask.showCardTask("#column3", this.changeViewInBoard);
             }
         })
@@ -54,7 +44,11 @@ export class BoardView {
     clearView() {
         this.#mainContainer.innerHTML = '';
     }
+
     changeViewInBoard(taskdId) {
-        console.log("Abriendo tarea...")
+        console.log(taskdId);
+        const taskController = new TaskController();
+        taskController.showDetails(taskdId);
+
     }
 }

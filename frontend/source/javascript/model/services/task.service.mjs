@@ -4,9 +4,10 @@ import { TaskModel } from '../task.model.mjs'
 export class TaskService {
 
     // GET Crea un nuevo log al mover tareas entre columnas
-    getAndMoveTask() {
-        return fetch(`${Config.API_URL}taskMoveTo/${idTask}/${idColum}`)
-            .then(response => response.json());
+    getAndMoveTask(idColumn, idTaks) {
+        fetch(`${Config.API_URL}taskMoveTo/${idTaks}/${idColumn}`)
+            .then(response => response.json())
+            .catch(err => console.error(err));
     }
 
     // // GET Traer una tarea por su ID
@@ -22,10 +23,16 @@ export class TaskService {
     }
 
     // POST Crear una nueva tarea en su respectivo tablero
-    createTask() {
-        return fetch(`${Config.API_URL}task/${idBoard}`, {
+    createTask(idBoard) {
+        const date = new Date(Date.now());
+        console.log(date);
+        fetch(`${Config.API_URL}task/${idBoard}`, {
             method: 'POST',
-            body: JSON.stringify(TaskModel),
+            body: JSON.stringify({
+                "name": "tarea uno",
+                "description": "Creando una tarea",
+                "deliveryDate": date
+            }),
             headers: {
                 'Content-Type': 'application/json'
             }
