@@ -25,7 +25,7 @@ export class TaskService {
     // POST Crear una nueva tarea en su respectivo tablero
     createTask(idBoard, newTask) {
         const {name, description, deliveryDate} = newTask;
-        console.log(deliveryDate);
+        
         fetch(`${Config.API_URL}task/${idBoard}`, {
             method: 'POST',
             body: JSON.stringify({
@@ -40,7 +40,9 @@ export class TaskService {
     }
 
     // PUT Actualizar una tarea por su ID
-    updateTaskById() {
+    updateTaskById(id, newTask) {
+        const {name, description, deliveryDate} = newTask;
+        
         return fetch(`${Config.API_URL}task/${id}`, {
             method: 'PUT',
             body: JSON.stringify(TaskModel),

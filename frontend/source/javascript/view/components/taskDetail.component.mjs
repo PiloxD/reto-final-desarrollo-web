@@ -1,11 +1,10 @@
+import { TaskController } from "../../controller/task.controller.mjs";
+
 export class TaskDetail {
     #state
-    #task
 
     constructor(task) {
         this.#createDetails(task[0]);
-
-
     }
 
     get() {
@@ -13,27 +12,35 @@ export class TaskDetail {
     }
 
     #createDetails(taskForDetail) {
+        const taskController = new TaskController;
+        const idTask = taskForDetail.getId();
         const name = taskForDetail.getName()
         const description = taskForDetail.getDescription()
         const logs = taskForDetail.getLogForTask()
-        const $formContainer = document.createElement('div');
-        $formContainer.classList.add('form-container');
+        const $detailsContainer = document.createElement('div');
+        $detailsContainer.classList.add('form-container');
 
-        $formContainer.innerHTML = `        
+        $detailsContainer.innerHTML = `        
            <div><h1>${name}</h1></div>
            <div><h1>${description}</h1></div>
-
         `
         logs.map(log => {
             const previous = log.idClmPrevious
             const current = log.idClmCurrent
             const date = log.createdAt
 
-            $formContainer.innerHTML += ` 
-            <div>Previous: ${previous} Current: ${current} Last Update: ${date} </div>
-            
+            $detailsContainer.innerHTML += ` 
+            <div>Previous: ${previous} Current: ${current} Last Update: ${date} </div>            
             `
         })
-        this.#state = $formContainer;
+        const $deleteButton = document.createElement('button');
+        $deleteButton.classList.add('delete-task');
+        $deleteButton.type = 'button';
+        $deleteButton.innerHTML = "Eliminar tarea";
+        $deleteButton.addEventListener('click', () => taskController.deleteTask(idTask));
+        $deleteButton.addEventListener('click', () => taskController.updateTask(idTask));
+
+        $detailsContainer.append($deleteButton);
+        this.#state = $detailsContainer;
     }
 }   

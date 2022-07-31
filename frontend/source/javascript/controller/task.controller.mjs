@@ -8,7 +8,6 @@ export class TaskController {
 
     constructor() {
         this.#allTasks = new Array()
-
     }
 
     async getTasks(idBoard) {
@@ -26,7 +25,7 @@ export class TaskController {
     }
 
     showForm(idBoard) {
-        const form = new TaskForm(this.handleChange);
+        const form = new TaskForm();
         const modal = new Modal();
         modal.showModal(form.get());
         const $buttonForm = document.getElementById("form-button");
@@ -63,7 +62,16 @@ export class TaskController {
     }
     taskFilter(taskList, taskId) {
         return taskList.filter(item => item.getId() === taskId)
+    }
 
+    deleteTask(idTaks){
+       const taskService = new TaskService();
+       taskService.deleteTaskById(idTaks);
+    }
+
+    updateTask(idTask){
+        const taskService = new TaskService();
+        taskService.updateTaskById(idTask);
     }
 
 }

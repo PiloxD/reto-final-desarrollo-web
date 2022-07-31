@@ -1,6 +1,7 @@
 import { BoardView } from "../view/board.view.mjs";
 import { BoardService } from "../model/services/board.service.mjs";
 import { BoardModel } from "../model/board.model.mjs";
+import { index } from "./index.controller.mjs";
 
 export class BoardController{
     #boarView;
@@ -25,6 +26,7 @@ export class BoardController{
         const boardToDelete = JSON.parse(id);
         const boardService = new BoardService();
         boardService.deleteBoardById(boardToDelete);
+        index.init();
     }
 
     captureInfoBoard(id, operation){

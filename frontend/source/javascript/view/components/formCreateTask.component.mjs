@@ -1,15 +1,15 @@
 export class TaskForm {
     #form;
 
-    constructor(handleChange){
-        this.#createForm(handleChange);
-    };
+    constructor(){
+        this.#createForm();
+    }
 
     get() {
         return this.#form;
     }
 
-    #createForm(handleChange){
+    #createForm(){
         const $formContainer = document.createElement('div');
         $formContainer.classList.add('form-container');
 
