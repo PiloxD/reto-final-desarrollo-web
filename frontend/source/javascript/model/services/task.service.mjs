@@ -4,9 +4,10 @@ import { TaskModel } from '../task.model.mjs'
 export class TaskService {
 
     // GET Crea un nuevo log al mover tareas entre columnas
-    getAndMoveTask() {
-        return fetch(`${Config.API_URL}taskMoveTo/${idTask}/${idColum}`)
-            .then(response => response.json());
+    getAndMoveTask(idColumn, idTaks) {
+        fetch(`${Config.API_URL}taskMoveTo/${idTaks}/${idColumn}`)
+            .then(response => response.json())
+            .catch(err => console.error(err));
     }
 
     // // GET Traer una tarea por su ID

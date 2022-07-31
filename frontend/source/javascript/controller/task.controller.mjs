@@ -3,7 +3,6 @@ import { ListTasks } from "../model/listTask.model.mjs";
 
 export class TaskController {
 
-
     async getTasks(idBoard) {
         const taskService = new TaskService();
         const response = await taskService.getAllTaskByBoardId(idBoard);
@@ -18,5 +17,10 @@ export class TaskController {
     }
 
     filterColumn() {
+    }
+
+    moveTask(idColumn, idTaks){
+        const taskService = new TaskService();
+        taskService.getAndMoveTask(idColumn, idTaks);
     }
 }
