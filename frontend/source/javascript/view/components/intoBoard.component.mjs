@@ -1,5 +1,4 @@
 import { TaskController } from "../../controller/task.controller.mjs";
-import { TaskForm } from "./formCreateTask.component.mjs";
 import { Navbar } from "./navbar.component.mjs";
 export class IntoBoard {
     #board
@@ -71,7 +70,7 @@ export class IntoBoard {
         e.preventDefault();
     }
     
-    dragLeave(e) {
+    dragLeave() {
         //Todo
     }
     

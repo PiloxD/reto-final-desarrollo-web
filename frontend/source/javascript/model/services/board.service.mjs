@@ -1,5 +1,4 @@
 import { Config } from '../../config.mjs'
-import { BoardModel } from '../board.model.mjs'
 
 export class BoardService {
     

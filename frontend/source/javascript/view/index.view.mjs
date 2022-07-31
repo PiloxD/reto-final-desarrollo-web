@@ -60,8 +60,5 @@ export class IndexView {
         const actionsButtons = new ActionsBoard();
     }
 
-    dragable(){
-        const $list = document.querySelector("#board-container");
-    }
 }
 
