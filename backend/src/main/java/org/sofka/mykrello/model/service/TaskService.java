@@ -1,8 +1,8 @@
 package org.sofka.mykrello.model.service;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.sofka.mykrello.model.domain.ColumnDomain;
@@ -83,17 +83,17 @@ public class TaskService implements TaskServiceInterface {
         var oldTasks = taskRepository.findById(id).get();
         task.setId(id);
 
-        if (task.getName() != null) {
+        if (!Objects.equals(task.getName(), "")) {
             String name = task.getName();
             oldTasks.setName(name);
         }
 
-        if (task.getDescription() != null) {
+        if (!Objects.equals(task.getDescription(), "")) {
             String description = task.getDescription();
             oldTasks.setDescription(description);
         }
 
-        if (task.getDeliveryDate() != null) {
+        if (!Objects.equals(task.getDeliveryDate(), "")) {
             String deliveryDate = task.getDeliveryDate();
             oldTasks.setDeliveryDate(deliveryDate);
         }
