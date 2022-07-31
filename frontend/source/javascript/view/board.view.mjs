@@ -24,19 +24,19 @@ export class BoardView {
                 const name = task.getName();
                 const taskdId = task.getId();
                 const newTask = new Task(taskdId, name);
-                newTask.showCardTask("#column1");
+                newTask.showCardTask("#column1", this.changeViewInBoard);
 
             } else if (task.getIdColumn() === 2) {
                 const name = task.getName();
                 const taskdId = task.getId();
                 const newTask = new Task(taskdId, name);
-                newTask.showCardTask("#column2");
+                newTask.showCardTask("#column2", this.changeViewInBoard);
             }
             else if (task.getIdColumn() === 3) {
                 const name = task.getName();
                 const taskdId = task.getId();
                 const newTask = new Task(taskdId, name);
-                newTask.showCardTask("#column3");
+                newTask.showCardTask("#column3", this.changeViewInBoard);
             }
 
         })
@@ -46,9 +46,12 @@ export class BoardView {
     clearView() {
         this.#mainContainer.innerHTML = '';
     }
+
     changeViewInBoard(taskdId) {
-        const boardController = new TaskController();
-        boardController.getTasks(taskdId);
+        console.log(taskdId);
+        const taskController = new TaskController();
+        taskController.showDetails(taskdId);
+        
     }
 
 }

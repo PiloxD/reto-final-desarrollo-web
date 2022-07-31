@@ -23,4 +23,13 @@ export class TaskController {
         const taskService = new TaskService();
         taskService.getAndMoveTask(idColumn, idTaks);
     }
+
+    createTask(idBoard){
+        const taskService = new TaskService();
+        taskService.createTask(idBoard);
+    }
+
+    showDetails(task){
+        
+    }
 }

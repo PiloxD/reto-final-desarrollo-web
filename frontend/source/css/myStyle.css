@@ -337,7 +337,7 @@ i{
 
 .column{
   width: 30%;
-  height: 80%;
+  margin-bottom: 20px;
   border-radius: 1rem;
   outline: none;
   background: #e0eafc;

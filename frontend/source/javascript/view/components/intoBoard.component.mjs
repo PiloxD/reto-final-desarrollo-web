@@ -2,9 +2,11 @@ import { TaskController } from "../../controller/task.controller.mjs";
 import { Navbar } from "./navbar.component.mjs";
 export class IntoBoard {
     #board
+    #idBoard
 
     constructor(board) {
         this.#board = board;
+        this.#idBoard = board.getId();
     }
 
 
@@ -21,7 +23,7 @@ export class IntoBoard {
         
         const $createTaskButton = document.createElement('button');
         $createTaskButton.id = "create-task-button";
-        $createTaskButton.addEventListener('click', this.createTask);
+        $createTaskButton.addEventListener('click', () => this.createTask(this.#idBoard));
         $createTaskButton.innerHTML = `
             Crear tarea 
             <i class="bi bi-plus-circle-fill"></i>
@@ -77,9 +79,10 @@ export class IntoBoard {
         const idTask = JSON.parse(localStorage.getItem('id-task'));
         taskController.moveTask(columnId,idTask);
     }
+    getId() { return this.#idBoard;}
 
-    createTask(){
-        const taskController = new TaskController(); 
-        //taskController.createTask();
+    createTask(idBoard){
+        const taskController = new TaskController();        
+        taskController.createTask(idBoard);
     }
 }

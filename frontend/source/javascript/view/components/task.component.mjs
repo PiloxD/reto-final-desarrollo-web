@@ -12,11 +12,10 @@ export class Task {
     }
 
 
-    showCardTask(column) {
+    showCardTask(column,changeViewInBoard) {
         const $taskContainer = document.querySelector(column);
         const $buttonTask = document.createElement('button');
-        console.log(this.#name)
-        $buttonTask.addEventListener('click', () => changeView(this.#taskdId));
+        $buttonTask.addEventListener('click', () => changeViewInBoard(this.#taskdId));
         $buttonTask.id = this.#taskdId;
         $buttonTask.type = 'button';
         $buttonTask.classList.add('card-task');
