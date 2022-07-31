@@ -17,37 +17,29 @@ export class BoardView {
         const newBoard = new IntoBoard(board);
         newBoard.showBoard();
 
-        const tasks = new TaskController()
-        this.#tasksInColum = await tasks.getTasks(board.getId())
-
-
+        const tasks = new TaskController();
+        this.#tasksInColum = await tasks.getTasks(board.getId());
 
         this.#tasksInColum.map(task => {
             if (task.getIdColumn() === 1) {
                 const name = task.getName();
-                const description = task.getDescription();
                 const taskdId = task.getId();
-                const deliveryDate = task.getDeliveryDate();
-                const logForTask = task.getLogForTask();
-                const newTask = new Task(taskdId, name, description, deliveryDate, logForTask);
+                const deliveryDate = task.getDeliveryDate();                
+                const newTask = new Task(taskdId, name, deliveryDate);
                 newTask.showCardTask("#column1", this.changeViewInBoard, this.#tasksInColum);
 
             } else if (task.getIdColumn() === 2) {
                 const name = task.getName();
-                const description = task.getDescription();
                 const taskdId = task.getId();
-                const deliveryDate = task.getDeliveryDate();
-                const logForTask = task.getLogForTask();
-                const newTask = new Task(taskdId, name, description, deliveryDate, logForTask);
+                const deliveryDate = task.getDeliveryDate();                
+                const newTask = new Task(taskdId, name, deliveryDate);
                 newTask.showCardTask("#column2", this.changeViewInBoard, this.#tasksInColum);
             }
             else if (task.getIdColumn() === 3) {
                 const name = task.getName();
-                const description = task.getDescription();
                 const taskdId = task.getId();
-                const deliveryDate = task.getDeliveryDate();
-                const logForTask = task.getLogForTask();
-                const newTask = new Task(taskdId, name, description, deliveryDate, logForTask);
+                const deliveryDate = task.getDeliveryDate();                
+                const newTask = new Task(taskdId, name, deliveryDate);
                 newTask.showCardTask("#column3", this.changeViewInBoard, this.#tasksInColum);
             }
         })

@@ -5,7 +5,6 @@ export class BoardService {
     
     // GET Traer todos los tableros
     getAllBoards() {
-        console.log("Pido board");
         return fetch(`${Config.API_URL}boards`)
         .then(response => response.json());         
     }

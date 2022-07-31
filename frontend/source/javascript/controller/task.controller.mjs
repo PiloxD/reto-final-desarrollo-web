@@ -24,37 +24,31 @@ export class TaskController {
         taskService.getAndMoveTask(idColumn, idTaks);
     }
 
-    showForm(idBoard) {
+    showForm(id, operation) {
         const form = new TaskForm();
         const modal = new Modal();
         modal.showModal(form.get());
         const $buttonForm = document.getElementById("form-button");
-        $buttonForm.addEventListener("click", () => this.getData(idBoard));
+        $buttonForm.addEventListener("click", () => this.getData(id, operation));
     }
-    getData(idBoard) {
+
+    getData(id, operation) {
+        let newTask = {
+            "name": null,
+            "description": null,
+            "deliveryDate": null
+        }        
         const $form = document.getElementById("task-form");
         const formData = new FormData($form);
 
-        if (formData.get("name") !== "") {
-            let newTask = {
-                "name": "",
-                "description": "",
-                "deliveryDate": null
-            }
-
-            newTask.name = formData.get("name");
-            newTask.description = formData.get("description");
-            let date = formData.get("deliveryDate").split("-");
-            const day = date[2];
-            const mouth = date[1];
-            const year = date[0];
-            const fecha = `${mouth}/${day}/${year}`;
-            newTask.deliveryDate = fecha;
-            this.createTask(idBoard, newTask)
-        } else { alert("Ingrese un nombre valido para su tarea"); }
+        newTask.name = formData.get("name");
+        newTask.description = formData.get("description");
+        newTask.deliveryDate = formData.get("deliveryDate");         
+        this.typeRequest(operation, id, newTask);
     }
 
     createTask(idBoard, newTask) {
+        console.log("create Task");
         const taskService = new TaskService();
         taskService.createTask(idBoard, newTask);
         const modal = new Modal();
@@ -69,9 +63,18 @@ export class TaskController {
        taskService.deleteTaskById(idTaks);
     }
 
-    updateTask(idTask){
+    updateTask(idTask, newTask){
         const taskService = new TaskService();
-        taskService.updateTaskById(idTask);
+        taskService.updateTaskById(idTask,newTask);
+        const modal = new Modal();
+        modal.closeModal();
+    }
+    typeRequest(operation, id, newTask){
+        if (newTask.name !== "" && operation === "create") {            
+            this.createTask(id, newTask)
+        }else if(operation === "update") {
+            this.updateTask(id, newTask)
+        }
     }
 
 }

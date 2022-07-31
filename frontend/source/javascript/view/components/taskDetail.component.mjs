@@ -28,7 +28,6 @@ export class TaskDetail {
             const previous = log.idClmPrevious
             const current = log.idClmCurrent
             const date = log.createdAt
-
             $detailsContainer.innerHTML += ` 
             <div>Previous: ${previous} Current: ${current} Last Update: ${date} </div>            
             `
@@ -38,9 +37,14 @@ export class TaskDetail {
         $deleteButton.type = 'button';
         $deleteButton.innerHTML = "Eliminar tarea";
         $deleteButton.addEventListener('click', () => taskController.deleteTask(idTask));
-        $deleteButton.addEventListener('click', () => taskController.updateTask(idTask));
 
-        $detailsContainer.append($deleteButton);
+        const $updateButton = document.createElement('button');
+        $updateButton.classList.add('update-task');
+        $updateButton.type = 'button';
+        $updateButton.innerHTML = "Editar tarea";
+        $updateButton.addEventListener('click', () => taskController.showForm(idTask, "update"));
+
+        $detailsContainer.append($deleteButton, $updateButton);
         this.#state = $detailsContainer;
     }
 }   

@@ -84,6 +84,6 @@ export class IntoBoard {
 
     createTask(idBoard){
         const taskController = new TaskController();        
-        taskController.showForm(idBoard);
+        taskController.showForm(idBoard, "create");
     }
 }

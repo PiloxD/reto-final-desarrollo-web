@@ -40,12 +40,16 @@ export class TaskService {
     }
 
     // PUT Actualizar una tarea por su ID
-    updateTaskById(id, newTask) {
+    updateTaskById(idTask, newTask) {
         const {name, description, deliveryDate} = newTask;
         
-        return fetch(`${Config.API_URL}task/${id}`, {
+        return fetch(`${Config.API_URL}task/${idTask}`, {
             method: 'PUT',
-            body: JSON.stringify(TaskModel),
+            body: JSON.stringify({
+                "name": name,
+                "description": description,
+                "deliveryDate": deliveryDate
+            }),
             headers: {
                 'Content-Type': 'application/json'
             }
