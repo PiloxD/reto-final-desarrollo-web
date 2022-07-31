@@ -17,7 +17,7 @@ export class BoardView {
         
         const tasks = new TaskController()
         const tasksInColum = await tasks.getTasks(board.getId())
-        console.log(tasksInColum)
+       //console.log(tasksInColum)
 
         tasksInColum.map(task => {
             if (task.getIdColumn() === 1) {

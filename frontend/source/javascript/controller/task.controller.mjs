@@ -1,5 +1,6 @@
 import { TaskService } from "../model/services/task.service.mjs";
 import { ListTasks } from "../model/listTask.model.mjs";
+import { Modal } from "../view/components/modal.component.mjs";
 
 export class TaskController {
 
@@ -25,8 +26,10 @@ export class TaskController {
     }
 
     createTask(idBoard){
-        const taskService = new TaskService();
-        taskService.createTask(idBoard);
+        const modal = new Modal();
+        modal.showModal();
+        //const taskService = new TaskService();
+        //taskService.createTask(idBoard);
     }
 
     showDetails(task){
