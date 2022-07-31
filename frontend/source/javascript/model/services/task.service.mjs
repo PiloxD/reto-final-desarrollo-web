@@ -23,15 +23,15 @@ export class TaskService {
     }
 
     // POST Crear una nueva tarea en su respectivo tablero
-    createTask(idBoard) {
-        const date = new Date(Date.now());
-        console.log(date);
+    createTask(idBoard, newTask) {
+        const {name, description, deliveryDate} = newTask;
+        console.log(deliveryDate);
         fetch(`${Config.API_URL}task/${idBoard}`, {
             method: 'POST',
             body: JSON.stringify({
-                "name": "tarea uno",
-                "description": "Creando una tarea",
-                "deliveryDate": date
+                "name": name,
+                "description": description,
+                "deliveryDate": deliveryDate
             }),
             headers: {
                 'Content-Type': 'application/json'

@@ -29,7 +29,8 @@ export class IndexView {
     
     changeView(idBoard){ 
         const boardController = new BoardController();
-        boardController.getBoard(idBoard)  
+        boardController.getBoard(idBoard);
+        localStorage.setItem('id-board',JSON.stringify(idBoard));  
     }
 
     #createTemplate() {        

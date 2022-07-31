@@ -1,4 +1,5 @@
 import { TaskController } from "../../controller/task.controller.mjs";
+import { TaskForm } from "./formCreateTask.component.mjs";
 import { Navbar } from "./navbar.component.mjs";
 export class IntoBoard {
     #board
@@ -83,6 +84,6 @@ export class IntoBoard {
 
     createTask(idBoard){
         const taskController = new TaskController();        
-        taskController.createTask(idBoard);
+        taskController.showForm(idBoard);
     }
 }
