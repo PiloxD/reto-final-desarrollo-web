@@ -3,12 +3,14 @@ export class TaskModel {
     #name;
     #deliveryDate;
     #idColumn
+    #LogForTask
 
-    constructor(id, name, deliveryDate, idColumn) {
+    constructor(id, name, deliveryDate, idColumn, LogForTask) {
         this.#taskdId = id;
         this.#name = name;
         this.#deliveryDate = deliveryDate;
         this.#idColumn = idColumn;
+        this.#LogForTask = LogForTask;
     }
 
     getId() { return this.#taskdId; }
@@ -18,4 +20,6 @@ export class TaskModel {
     getDeliveryDate() { return this.#deliveryDate; }
 
     getIdColumn() { return this.#idColumn; }
+
+    getLogs() { return this.#LogForTask; }
 }
