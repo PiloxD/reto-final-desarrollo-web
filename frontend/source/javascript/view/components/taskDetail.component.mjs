@@ -1,22 +1,39 @@
 export class TaskDetail {
+    #state
+    #task
 
-    // showTaskDetail(){
-    //     const $container = document.querySelector("#container");
+    constructor(task) {
+        this.#createDetails(task[0]);
 
-    //     const $overlay = document.createElement("div");
-    //     $overlay.classList.add('overlay');
 
-    //     const $modalContainer = document.createElement("div");
-    //     $modalContainer.classList.add('modal-container');
+    }
 
-    //     const closeButton = document.createElement("button");
-    //     closeButton.classList.add('close-modal');
-    //     closeButton.type = "button";
-    //     closeButton.innerHTML =` 
-    //         <i class="bi bi-x-circle-fill"></i>
-    //     ` 
-    //     closeButton.addEventListener("click", this.closeModal);
+    get() {
+        return this.#state;
+    }
 
-    // }
+    #createDetails(taskForDetail) {
+        const name = taskForDetail.getName()
+        const description = taskForDetail.getDescription()
+        const logs = taskForDetail.getLogForTask()
+        const $formContainer = document.createElement('div');
+        $formContainer.classList.add('form-container');
 
+        $formContainer.innerHTML = `        
+           <div><h1>${name}</h1></div>
+           <div><h1>${description}</h1></div>
+
+        `
+        logs.map(log => {
+            const previous = log.idClmPrevious
+            const current = log.idClmCurrent
+            const date = log.createdAt
+
+            $formContainer.innerHTML += ` 
+            <div>Previous: ${previous} Current: ${current} Last Update: ${date} </div>
+            
+            `
+        })
+        this.#state = $formContainer;
+    }
 }   

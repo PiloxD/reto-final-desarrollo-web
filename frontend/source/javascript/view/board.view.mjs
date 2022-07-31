@@ -1,11 +1,13 @@
 import { IntoBoard } from "./components/intoBoard.component.mjs";
 import { TaskController } from '../controller/task.controller.mjs'
 import { Task } from "./components/task.component.mjs";
+import { Modal } from "./components/modal.component.mjs";
+import { TaskDetail } from "./components/taskDetail.component.mjs";
 
 
 export class BoardView {
     #mainContainer;
-
+    #tasksInColum
     constructor() {
         this.#mainContainer = document.querySelector('#container');
     }
@@ -16,30 +18,37 @@ export class BoardView {
         newBoard.showBoard();
 
         const tasks = new TaskController()
-        const tasksInColum = await tasks.getTasks(board.getId())
-        console.log("viendo.. ", tasksInColum)
+        this.#tasksInColum = await tasks.getTasks(board.getId())
 
-        tasksInColum.map(task => {
+
+
+        this.#tasksInColum.map(task => {
             if (task.getIdColumn() === 1) {
                 const name = task.getName();
+                const description = task.getDescription();
                 const taskdId = task.getId();
                 const deliveryDate = task.getDeliveryDate();
-                const newTask = new Task(taskdId, name, deliveryDate);
-                newTask.showCardTask("#column1", this.changeViewInBoard);
+                const logForTask = task.getLogForTask();
+                const newTask = new Task(taskdId, name, description, deliveryDate, logForTask);
+                newTask.showCardTask("#column1", this.changeViewInBoard, this.#tasksInColum);
 
             } else if (task.getIdColumn() === 2) {
                 const name = task.getName();
+                const description = task.getDescription();
                 const taskdId = task.getId();
                 const deliveryDate = task.getDeliveryDate();
-                const newTask = new Task(taskdId, name, deliveryDate);
-                newTask.showCardTask("#column2", this.changeViewInBoard);
+                const logForTask = task.getLogForTask();
+                const newTask = new Task(taskdId, name, description, deliveryDate, logForTask);
+                newTask.showCardTask("#column2", this.changeViewInBoard, this.#tasksInColum);
             }
             else if (task.getIdColumn() === 3) {
                 const name = task.getName();
+                const description = task.getDescription();
                 const taskdId = task.getId();
                 const deliveryDate = task.getDeliveryDate();
-                const newTask = new Task(taskdId, name, deliveryDate);
-                newTask.showCardTask("#column3", this.changeViewInBoard);
+                const logForTask = task.getLogForTask();
+                const newTask = new Task(taskdId, name, description, deliveryDate, logForTask);
+                newTask.showCardTask("#column3", this.changeViewInBoard, this.#tasksInColum);
             }
         })
     }
@@ -48,10 +57,12 @@ export class BoardView {
         this.#mainContainer.innerHTML = '';
     }
 
-    changeViewInBoard(taskdId) {
-        console.log(taskdId);
-        const taskController = new TaskController();
-        taskController.showDetails(taskdId);
+    changeViewInBoard(taskId, taskList) {
+        const task = new TaskController().taskFilter(taskList, taskId)
+        const detail = new TaskDetail(task)
+        const modal = new Modal()
+        modal.showModal(detail.get())
+
 
     }
 }

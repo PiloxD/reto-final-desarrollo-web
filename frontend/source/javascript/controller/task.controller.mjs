@@ -6,7 +6,7 @@ import { TaskForm } from "../view/components/formCreateTask.component.mjs";
 export class TaskController {
     #allTasks;
 
-    constructor(){
+    constructor() {
         this.#allTasks = new Array()
 
     }
@@ -18,31 +18,31 @@ export class TaskController {
         const listTask = new ListTasks();
         this.#allTasks = await listTask.getList(data);
         return this.#allTasks
-        
+
     }
-    moveTask(idColumn, idTaks){
+    moveTask(idColumn, idTaks) {
         const taskService = new TaskService();
         taskService.getAndMoveTask(idColumn, idTaks);
     }
 
-    showForm(idBoard){
+    showForm(idBoard) {
         const form = new TaskForm(this.handleChange);
         const modal = new Modal();
-        modal.showModal(form.get());        
+        modal.showModal(form.get());
         const $buttonForm = document.getElementById("form-button");
-        $buttonForm.addEventListener("click",() => this.getData(idBoard));        
+        $buttonForm.addEventListener("click", () => this.getData(idBoard));
     }
-    getData(idBoard){
+    getData(idBoard) {
         const $form = document.getElementById("task-form");
-        const formData  = new FormData($form);
+        const formData = new FormData($form);
 
-        if (formData.get("name") !== ""){ 
+        if (formData.get("name") !== "") {
             let newTask = {
                 "name": "",
                 "description": "",
                 "deliveryDate": null
             }
-            
+
             newTask.name = formData.get("name");
             newTask.description = formData.get("description");
             let date = formData.get("deliveryDate").split("-");
@@ -50,17 +50,20 @@ export class TaskController {
             const mouth = date[1];
             const year = date[0];
             const fecha = `${mouth}/${day}/${year}`;
-            newTask.deliveryDate = fecha;                        
-            this.createTask(idBoard,newTask)
-        }else{  alert("Ingrese un nombre valido para su tarea"); }        
+            newTask.deliveryDate = fecha;
+            this.createTask(idBoard, newTask)
+        } else { alert("Ingrese un nombre valido para su tarea"); }
     }
 
-    createTask(idBoard,newTask){
+    createTask(idBoard, newTask) {
         const taskService = new TaskService();
-        taskService.createTask(idBoard,newTask);
+        taskService.createTask(idBoard, newTask);
         const modal = new Modal();
         modal.closeModal();
     }
+    taskFilter(taskList, taskId) {
+        return taskList.filter(item => item.getId() === taskId)
 
+    }
 
 }

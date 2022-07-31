@@ -34,7 +34,7 @@ public class TaskDomain implements Serializable {
     private String description;
 
     @Column(name = "tsk_delivery_date")
-    private Instant deliveryDate;
+    private String deliveryDate;
 
     @Column(name = "tsk_created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();

@@ -94,7 +94,7 @@ public class TaskService implements TaskServiceInterface {
         }
 
         if (task.getDeliveryDate() != null) {
-            Instant deliveryDate = task.getDeliveryDate();
+            String deliveryDate = task.getDeliveryDate();
             oldTasks.setDeliveryDate(deliveryDate);
         }
 
