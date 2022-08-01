@@ -5,11 +5,10 @@ import { index } from "./index.controller.mjs";
 
 export class BoardController{
     #boarView;
-    #nameBoard;
+    
 
     constructor() {
-        this.#boarView = new BoardView();
-        this.#nameBoard = "dsafs";
+        this.#boarView = new BoardView(); 
     }
 
     async getBoard(id) {
@@ -38,7 +37,7 @@ export class BoardController{
               autocapitalize: 'off'
             },
             showCancelButton: true,
-            confirmButtonText: 'Crear',
+            confirmButtonText: 'Create',
             showLoaderOnConfirm: true,
             preConfirm: (name) => {             
                 if (name !== "") {

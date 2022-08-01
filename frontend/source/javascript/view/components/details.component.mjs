@@ -1,5 +1,3 @@
-import { TaskController } from "../../controller/task.controller.mjs";
-
 export class DescriptionTask {
     #description
 
@@ -23,10 +21,10 @@ export class DescriptionTask {
             <div class = "details-description">
                 <p>${description}</p>
             </div>
-            <div class = "details-description">
-                <p>${deliveryDate}</p>
+            <div class = "delivery-description">
+                ${deliveryDate}
             </div>
-            <div>
+            <div class = "table-container">
                 <table class="table">
                     <thead>
                         <tr>

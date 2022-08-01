@@ -26,17 +26,16 @@ export class TaskController {
 
     showForm(id, operation) {
         const form = new TaskForm();
-        //const modal = new Modal();
-        //modal.showModal(form.get());
         Swal.fire({
             html:
             form.get(),
-            cancelButtonText:
-              '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down'
+            confirmButtonText: "Confirm",
+            showCloseButton:true
+        }).then((result) =>{
+            if (result.isConfirmed) {
+                this.getData(id, operation);
+            }
         })
-        const $buttonForm = document.getElementById("form-button");
-        $buttonForm.addEventListener("click", () => this.getData(id, operation));
     }
 
     getData(id, operation) {

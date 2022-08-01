@@ -52,9 +52,9 @@ export class ActionsBoard {
         Swal.fire({
             title: '¿Desea eliminar el board?',
             icon: 'warning',
-            confirmButtonText: 'Continuar.',
+            confirmButtonText: 'Confirm.',
             showCloseButton:true,
-            cancelButtonText: 'Cancelar.',
+            cancelButtonText: 'Cancel.',
             
         })
         .then((result) => {

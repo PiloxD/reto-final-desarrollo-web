@@ -1,14 +1,13 @@
 import { IntoBoard } from "./components/intoBoard.component.mjs";
 import { TaskController } from '../controller/task.controller.mjs'
 import { Task } from "./components/task.component.mjs";
-import { Modal } from "./components/modal.component.mjs";
-import { TaskDetail } from "./components/taskDetail.component.mjs";
 import { DescriptionTask } from "./components/details.component.mjs";
 
 
 export class BoardView {
     #mainContainer;
     #tasksInColum
+    
     constructor() {
         this.#mainContainer = document.querySelector('#container');
     }
@@ -49,27 +48,19 @@ export class BoardView {
     clearView() {
         this.#mainContainer.innerHTML = '';
     }
-    
-    /*changeViewInBoard(taskId, taskList) {
-        const task = new TaskController().taskFilter(taskList, taskId)
-        const detail = new TaskDetail(task)
-        const modal = new Modal()
-        modal.showModal(detail.get())
-    }*/
 
     changeViewInBoard(taskId, taskList) {
         const task = new TaskController().taskFilter(taskList, taskId);
         const descriptionTask = new DescriptionTask(task);
         const domDescription = descriptionTask.get();
         const logs = task.getLogForTask();
-        console.log(task);
         Swal.fire({
             html:
             domDescription,
-            cancelButtonText:
-              '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down'
+            showCloseButton:true,
+            showConfirmButton: false,
         })
+
         const taskController = new TaskController();
 
         const $updateButton = document.querySelector("#update-task");

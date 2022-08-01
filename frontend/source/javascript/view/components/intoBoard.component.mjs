@@ -25,7 +25,7 @@ export class IntoBoard {
         $createTaskButton.id = "create-task-button";
         $createTaskButton.addEventListener('click', () => this.createTask(this.#idBoard));
         $createTaskButton.innerHTML = `
-            Crear tarea 
+            Create Task 
             <i class="bi bi-plus-circle-fill"></i>
         `
         $boardTitle.append($createTaskButton);
@@ -69,11 +69,7 @@ export class IntoBoard {
     dragOver(e) {
         e.preventDefault();
     }
-    
-    dragLeave() {
-        //Todo
-    }
-    
+
     drop(columnId) {
         const taskController = new TaskController();
         const idTask = JSON.parse(localStorage.getItem('id-task'));
