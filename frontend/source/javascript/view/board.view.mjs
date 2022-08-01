@@ -72,8 +72,6 @@ export class BoardView {
 
         const taskController = new TaskController();
 
-<<<<<<< HEAD
-=======
         const $updateButton = document.querySelector("#update-task");
         $updateButton.addEventListener('click', () => taskController.showForm(taskId, "update"));
 
@@ -90,6 +88,5 @@ export class BoardView {
             </tr>
             `
         });
->>>>>>> 4f29235978fbc440a21c04940d3e1179e5a0b921
     }
 }
