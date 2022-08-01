@@ -91,10 +91,6 @@ export class TaskController {
         taskService.deleteTaskById(idTaks);
     }
 
-    updateTask(idTask, newTask, idBoard){
-        const taskService = new TaskService();
-        taskService.updateTaskById(idTask,newTask, idBoard);
-    }
     typeRequest(operation, id, newTask, idBoard){
         if (newTask.name !== "" && operation === "create") {            
             this.createTask(id, newTask)
@@ -102,22 +98,17 @@ export class TaskController {
             this.updateTask(id, newTask, idBoard)
         }
     }
+    
     /**
      * Actualiza una tarea
      * @param {*} idTask ID de la tarea a actualizar
      * @param {*} newTask Información de la tarea
+     * @param {*} idBoard Id Tablero Actual
      */
-    updateTask(idTask, newTask) {
+    updateTask(idTask, newTask, idBoard){
+        console.log(idBoard);
         const taskService = new TaskService();
-        taskService.updateTaskById(idTask, newTask);
-    }
-
-    typeRequest(operation, id, newTask) {
-        if (newTask.name !== "" && operation === "create") {
-            this.createTask(id, newTask)
-        } else if (operation === "update") {
-            this.updateTask(id, newTask)
-        }
+        taskService.updateTaskById(idTask,newTask, idBoard);
     }
     
     deleteTask(idTaks, idBoard){       

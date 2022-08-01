@@ -64,7 +64,7 @@ export class BoardView {
     changeViewInBoard(taskId, taskList) {
         const task = new TaskController().taskFilter(taskList, taskId);
         const descriptionTask = new DescriptionTask(task);
-        const idBoard = task.getIdBoard();
+        const idBoard = task.getIdBoard();        
         const domDescription = descriptionTask.get();
         const logs = task.getLogForTask();
         Swal.fire({
