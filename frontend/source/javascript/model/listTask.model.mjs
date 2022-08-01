@@ -12,7 +12,11 @@ export class ListTasks {
     #addTask(board) {
         this.#listTasks.push(board);
     }
-
+    /**
+     *  Este método sirve para recorrer las tareas e instanciarlas en una lista de ellas
+     * @param {*} data 
+     * @returns 
+     */
     getList(data) {
         data.map(item => {
             const { id, name, description, deliveryDate, logForTask, idColumn, idBoard } = item;

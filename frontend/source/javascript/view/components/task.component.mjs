@@ -3,13 +3,18 @@ export class Task {
     #name;
     #deliveryDate;
 
-    constructor(id, name, deliveryDate) {
+    constructor(id, name,  deliveryDate) {
         this.#taskdId = id;
         this.#name = name;
         this.#deliveryDate = deliveryDate;
     }
 
-
+/**
+ *  Este método sirve para mostrar las tarjetas de las tareas
+ * @param {*} column Columna en la que se posicionará la tarea
+ * @param {*} changeViewInBoard Método que abre los detalles de la tarea
+ * @param {*} tasksInColum Lista de las tareas en columnas
+ */
     showCardTask(column,changeViewInBoard, tasksInColum) {
         const $taskContainer = document.querySelector(column);
         const $buttonTask = document.createElement('button');
@@ -33,7 +38,10 @@ export class Task {
             `
         }
     }
-
+/**
+ * Este método sirve para capturar el id de una tarea y mandarlo al LocalStorage
+ * @param {*} e evento 
+ */
     dragStart(e) {
         localStorage.setItem('id-task', JSON.stringify(e.target.id));
     }

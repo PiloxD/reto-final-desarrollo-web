@@ -1,3 +1,6 @@
+/**
+ * Clase para el modelo de las tareas
+ */
 export class TaskModel {
     #taskdId;
     #name;

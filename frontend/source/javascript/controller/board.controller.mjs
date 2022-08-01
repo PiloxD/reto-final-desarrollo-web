@@ -10,7 +10,10 @@ export class BoardController{
     constructor() {
         this.#boarView = new BoardView(); 
     }
-
+/**
+ *  Este método sirve para traer el tablero seleccionado
+ * @param {*} id id del tablero seleccionado 
+ */
     async getBoard(id) {
         const boardService = new BoardService();
         const response = await boardService.getBoardById(id);
@@ -19,7 +22,9 @@ export class BoardController{
         const newBoard = new BoardModel(id, name);                
         this.#boarView.init(newBoard);                  
     }
-
+/**
+ * Este método sirve para eliminar un tablero
+ */
     deleteBoard() {
         const id = localStorage.getItem("id-board");
         const boardToDelete = JSON.parse(id);
@@ -27,7 +32,11 @@ export class BoardController{
         boardService.deleteBoardById(boardToDelete);
         index.init();
     }
-
+/**
+ * Este método sirve para crear un tablero nuevo desde el botón en la aplicación
+ * @param {*} id 
+ * @param {*} operation 
+ */
     captureInfoBoard(id, operation){
         const boardService = new BoardService();
         Swal.fire({

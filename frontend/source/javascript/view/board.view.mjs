@@ -11,8 +11,11 @@ export class BoardView {
     constructor() {
         this.#mainContainer = document.querySelector('#container');
     }
-
-    async init(board) {        
+    /**
+     * Método para inicializar la vista del tablero seleccionado
+     * @param {*} board 
+     */
+    async init(board) {
         this.clearView();
         const newBoard = new IntoBoard(board);
         newBoard.showBoard();
@@ -47,11 +50,17 @@ export class BoardView {
             }
         })
     }
-
+    /**
+     * Método para limpiar la vista
+     */
     clearView() {
         this.#mainContainer.innerHTML = '';
     }
-
+    /**
+     * Método para traer los detalles de la tarea seleccionada
+     * @param {*} taskId ID de la tarea seleccionada
+     * @param {*} taskList  Lista de todas las tareas del tablero
+     */
     changeViewInBoard(taskId, taskList) {
         const task = new TaskController().taskFilter(taskList, taskId);
         const descriptionTask = new DescriptionTask(task);
