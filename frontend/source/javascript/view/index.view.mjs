@@ -8,9 +8,12 @@ export class IndexView {
 
     constructor() {
         this.#mainContainer = document.querySelector('#container');
-        
-    }
 
+    }
+    /**
+     * Método para inicializar la vista principal
+     * @param {*} boards Tableros a mostrar
+     */
     init(boards) {
         this.#clearView();
         this.#createTemplate();
@@ -20,20 +23,23 @@ export class IndexView {
             const newBoard = new Board(name, boardId);
             newBoard.showCardBoard(this.changeView);
         });
-                  
+
     }
 
     #clearView() {
         this.#mainContainer.innerHTML = '';
     }
-    
-    changeView(idBoard){ 
+    /**
+     * Método para entrar en un tablero
+     * @param {*} idBoard ID del tablero seleccionado
+     */
+    changeView(idBoard) {
         const boardController = new BoardController();
         boardController.getBoard(idBoard);
-        localStorage.setItem('id-board',JSON.stringify(idBoard));  
+        localStorage.setItem('id-board', JSON.stringify(idBoard));
     }
 
-    #createTemplate() {        
+    #createTemplate() {
         const navbar = new Navbar();
         const $nav = navbar.get();
         const $main = document.createElement('main');
@@ -52,7 +58,7 @@ export class IndexView {
 
         const $infoContainer = document.createElement('div');
         $infoContainer.classList.add('info-container');
-        $infoContainer.append($cardsBoardContainer, $actiosBoards);        
+        $infoContainer.append($cardsBoardContainer, $actiosBoards);
 
         $main.append($title, $infoContainer);
         this.#mainContainer.append($nav, $main);

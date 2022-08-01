@@ -11,7 +11,9 @@ class IndexController {
     constructor() {
         this.#indexView = new IndexView();
     }
-
+/**
+ * Este método sirve para inicializar el controlador principal
+ */
     async init() {
         const listBoard = new ListBoard();
         const boardService = new BoardService();    
