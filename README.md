@@ -8,7 +8,7 @@ Se trabajaron las siguientes tecnologías:
 - Javascript, HTML y CSS para el frontend
 - MySQL como motor de bases de datos
 
-Funcionalidad Tableros:
+#### Funcionalidad Tableros:
 
 Al ingresar a la aplicación encontrarás un panel con el listado de los tableros existentes con su respectivo nombre. Dos tarjetas en el lado derecho con la funcionalidad de crear un tablero nuevo, la funcionalidad de eliminar y la de actualizar el nombre de un tablero.
 
@@ -16,7 +16,7 @@ Al ingresar a la aplicación encontrarás un panel con el listado de los tablero
 - Eliminar un tablero existente: Para eliminar un tablero debes arrastrarlo hasta la tarjeta *Drag for Delete board*, al soltar el tablero te saldrá una alerta de confirmación.
 - Actualizar el nombre de un tablero: Para actualizar debes hacer click en el ícono del lápiz que está debajo de cada tablero e ingresar el nuevo nombre.
 
-Funcionalidad Tareas:
+#### Funcionalidad Tareas:
 
 Al hacer click en un tablero ingresarás al espacio de las tareas, donde encontrarás las columnas y sus respectivas tareas. Tendrás un botón para crear una tarea con su nombre, descripción y fecha de vencimiento, también podrás ver el contenido de cada tarea haciendo click sobre ella y moverla a la columna deseada arrastrándola.
 
