@@ -22,8 +22,5 @@ export class Modal {
         $container.append($overlay);
     }
 
-    closeModal() {
-        document.querySelector(".overlay").remove();
-    }
 
 }

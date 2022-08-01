@@ -20,14 +20,17 @@ export class TaskController {
         const data = response.data;
         const listTask = new ListTasks();
         this.#allTasks = await listTask.getList(data);
-        return this.#allTasks
-
+        return this.#allTasks;
     }
+<<<<<<< HEAD
     /**
      *  Este método sirve para cambiar la columna en la que se encuentra una tarea
      * @param {*} idColumn ID de la columna
      * @param {*} idTaks  ID de la tarea
      */
+=======
+
+>>>>>>> 4f29235978fbc440a21c04940d3e1179e5a0b921
     moveTask(idColumn, idTaks) {
         const taskService = new TaskService();
         taskService.getAndMoveTask(idColumn, idTaks);
@@ -39,10 +42,16 @@ export class TaskController {
      */
     showForm(id, operation) {
         const form = new TaskForm();
-        const modal = new Modal();
-        modal.showModal(form.get());
-        const $buttonForm = document.getElementById("form-button");
-        $buttonForm.addEventListener("click", () => this.getData(id, operation));
+        Swal.fire({
+            html:
+            form.get(),
+            confirmButtonText: "Confirm",
+            showCloseButton:true
+        }).then((result) =>{
+            if (result.isConfirmed) {
+                this.getData(id, operation);
+            }
+        })
     }
     /**
      *  Este método sirve para capturar la información de una tarea nueva
@@ -69,12 +78,12 @@ export class TaskController {
      * @param {*} newTask Información de la nueva tarea
      */
     createTask(idBoard, newTask) {
-        console.log("create Task");
         const taskService = new TaskService();
         taskService.createTask(idBoard, newTask);
         const modal = new Modal();
         modal.closeModal();
     }
+<<<<<<< HEAD
     /**
      * Filtra la tarea a la cual se le hizo click para visualizar su información
      * @param {*} taskList Lista de todas las tareas
@@ -91,6 +100,11 @@ export class TaskController {
     deleteTask(idTaks) {
         const taskService = new TaskService();
         taskService.deleteTaskById(idTaks);
+=======
+
+    taskFilter(taskList, taskId) {
+        return taskList.find(item => item.getId() === taskId)
+>>>>>>> 4f29235978fbc440a21c04940d3e1179e5a0b921
     }
     /**
      * Actualiza una tarea
@@ -99,9 +113,13 @@ export class TaskController {
      */
     updateTask(idTask, newTask) {
         const taskService = new TaskService();
+<<<<<<< HEAD
         taskService.updateTaskById(idTask, newTask);
         const modal = new Modal();
         modal.closeModal();
+=======
+        taskService.updateTaskById(idTask,newTask);
+>>>>>>> 4f29235978fbc440a21c04940d3e1179e5a0b921
     }
     typeRequest(operation, id, newTask) {
         if (newTask.name !== "" && operation === "create") {
@@ -110,5 +128,37 @@ export class TaskController {
             this.updateTask(id, newTask)
         }
     }
-
+    
+    deleteTask(idTaks){
+        Swal.fire({
+            title: '¿Desea eliminar la tarea?',
+            icon: 'warning',
+            confirmButtonText: 'Continuar.',
+            showCloseButton:true,
+            cancelButtonText: 'Cancelar.',            
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                const taskService = new TaskService();
+                taskService.deleteTaskById(idTaks);
+                const modal = new Modal();
+                modal.closeModal();
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully',
+                })
+            } 
+        })
+    }
 }

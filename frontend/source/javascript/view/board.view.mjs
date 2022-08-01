@@ -1,13 +1,13 @@
 import { IntoBoard } from "./components/intoBoard.component.mjs";
 import { TaskController } from '../controller/task.controller.mjs'
 import { Task } from "./components/task.component.mjs";
-import { Modal } from "./components/modal.component.mjs";
-import { TaskDetail } from "./components/taskDetail.component.mjs";
+import { DescriptionTask } from "./components/details.component.mjs";
 
 
 export class BoardView {
     #mainContainer;
     #tasksInColum
+    
     constructor() {
         this.#mainContainer = document.querySelector('#container');
     }
@@ -59,10 +59,37 @@ export class BoardView {
      * @param {*} taskList  Lista de todas las tareas del tablero
      */
     changeViewInBoard(taskId, taskList) {
-        const task = new TaskController().taskFilter(taskList, taskId)
-        const detail = new TaskDetail(task)
-        const modal = new Modal()
-        modal.showModal(detail.get())
+        const task = new TaskController().taskFilter(taskList, taskId);
+        const descriptionTask = new DescriptionTask(task);
+        const domDescription = descriptionTask.get();
+        const logs = task.getLogForTask();
+        Swal.fire({
+            html:
+            domDescription,
+            showCloseButton:true,
+            showConfirmButton: false,
+        })
 
+        const taskController = new TaskController();
+
+<<<<<<< HEAD
+=======
+        const $updateButton = document.querySelector("#update-task");
+        $updateButton.addEventListener('click', () => taskController.showForm(taskId, "update"));
+
+        const $deleteButton = document.querySelector("#delete-task");
+        $deleteButton.addEventListener('click', () => taskController.deleteTask(taskId));
+        
+        const $tableBody = document.querySelector("#details-logs");
+        logs.map((log) => {
+            $tableBody.innerHTML += `
+            <tr>
+                <td>${log.idClmPrevious}</td>
+                <td>${log.idClmCurrent}</td>
+                <td>${log.createdAt}</td>
+            </tr>
+            `
+        });
+>>>>>>> 4f29235978fbc440a21c04940d3e1179e5a0b921
     }
 }

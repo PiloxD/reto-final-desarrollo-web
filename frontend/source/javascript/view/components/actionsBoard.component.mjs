@@ -47,18 +47,14 @@ export class ActionsBoard {
         e.preventDefault();
     }
     
-    dragLeave(e) {
-        //Todo
-    }
     
     drop() {
-        const idBoard = JSON.parse(localStorage.getItem('id-board'));
         Swal.fire({
             title: '¿Desea eliminar el board?',
             icon: 'warning',
-            confirmButtonText: 'Si mi teacher.',
+            confirmButtonText: 'Confirm.',
             showCloseButton:true,
-            cancelButtonText: 'Cancelar.',
+            cancelButtonText: 'Cancel.',
             
         })
         .then((result) => {

@@ -26,7 +26,7 @@ export class BoardService {
                 'Content-Type': 'application/json'                
             }
         })
-        .then(response => console.log(response))
+        .then(() => location.reload())
         .catch(err => console.error(err)); 
 
     } 
@@ -44,12 +44,15 @@ export class BoardService {
                 'Content-Type': 'application/json'                
             }
         })
+        .then(() =>location.reload())
+        .catch(err => console.error(err));
+        
     }
     // DELETE Elimina un tablero por su ID 
     deleteBoardById = (id) =>{
         axios.delete(`${Config.API_URL}board/${id}`)
-        .then(function (response) {
-            console.log(response);
+        .then(function () {
+            location.reload();
         })
         .catch(function (error) {
             console.log(error);
