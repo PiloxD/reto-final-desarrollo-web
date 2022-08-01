@@ -12,7 +12,7 @@ export class BoardView {
         this.#mainContainer = document.querySelector('#container');
     }
 
-    async init(board) {
+    async init(board) {        
         this.clearView();
         const newBoard = new IntoBoard(board);
         newBoard.showBoard();
@@ -24,22 +24,25 @@ export class BoardView {
             if (task.getIdColumn() === 1) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const deliveryDate = task.getDeliveryDate();                
-                const newTask = new Task(taskdId, name, deliveryDate);
+                const deliveryDate = task.getDeliveryDate();
+                const idBoard = task.getId();                
+                const newTask = new Task(taskdId, name, deliveryDate, idBoard);
                 newTask.showCardTask("#column1", this.changeViewInBoard, this.#tasksInColum);
 
             } else if (task.getIdColumn() === 2) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const deliveryDate = task.getDeliveryDate();                
-                const newTask = new Task(taskdId, name, deliveryDate);
+                const deliveryDate = task.getDeliveryDate();
+                const idBoard = task.getId();                 
+                const newTask = new Task(taskdId, name, deliveryDate, idBoard);
                 newTask.showCardTask("#column2", this.changeViewInBoard, this.#tasksInColum);
             }
             else if (task.getIdColumn() === 3) {
                 const name = task.getName();
                 const taskdId = task.getId();
-                const deliveryDate = task.getDeliveryDate();                
-                const newTask = new Task(taskdId, name, deliveryDate);
+                const deliveryDate = task.getDeliveryDate();
+                const idBoard = task.getId();                 
+                const newTask = new Task(taskdId, name, deliveryDate, idBoard);
                 newTask.showCardTask("#column3", this.changeViewInBoard, this.#tasksInColum);
             }
         })
@@ -52,6 +55,7 @@ export class BoardView {
     changeViewInBoard(taskId, taskList) {
         const task = new TaskController().taskFilter(taskList, taskId);
         const descriptionTask = new DescriptionTask(task);
+        const idBoard = task.getIdBoard();
         const domDescription = descriptionTask.get();
         const logs = task.getLogForTask();
         Swal.fire({
@@ -64,10 +68,10 @@ export class BoardView {
         const taskController = new TaskController();
 
         const $updateButton = document.querySelector("#update-task");
-        $updateButton.addEventListener('click', () => taskController.showForm(taskId, "update"));
+        $updateButton.addEventListener('click', () => taskController.showForm(taskId, "update", idBoard));
 
         const $deleteButton = document.querySelector("#delete-task");
-        $deleteButton.addEventListener('click', () => taskController.deleteTask(taskId));
+        $deleteButton.addEventListener('click', () => taskController.deleteTask(taskId, idBoard));
         
         const $tableBody = document.querySelector("#details-logs");
         logs.map((log) => {

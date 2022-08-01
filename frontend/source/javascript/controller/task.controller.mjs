@@ -1,6 +1,5 @@
 import { TaskService } from "../model/services/task.service.mjs";
 import { ListTasks } from "../model/listTask.model.mjs";
-import { Modal } from "../view/components/modal.component.mjs";
 import { TaskForm } from "../view/components/formCreateTask.component.mjs";
 
 export class TaskController {
@@ -24,7 +23,7 @@ export class TaskController {
         taskService.getAndMoveTask(idColumn, idTaks);
     }
 
-    showForm(id, operation) {
+    showForm(id, operation, idBoard) {
         const form = new TaskForm();
         Swal.fire({
             html:
@@ -33,12 +32,12 @@ export class TaskController {
             showCloseButton:true
         }).then((result) =>{
             if (result.isConfirmed) {
-                this.getData(id, operation);
+                this.getData(id, operation, idBoard);
             }
         })
     }
 
-    getData(id, operation) {
+    getData(id, operation, idBoard) {
         let newTask = {
             "name": null,
             "description": null,
@@ -50,33 +49,31 @@ export class TaskController {
         newTask.name = formData.get("name");
         newTask.description = formData.get("description");
         newTask.deliveryDate = formData.get("deliveryDate");         
-        this.typeRequest(operation, id, newTask);
+        this.typeRequest(operation, id, newTask, idBoard);
     }
 
     createTask(idBoard, newTask) {
         const taskService = new TaskService();
         taskService.createTask(idBoard, newTask);
-        const modal = new Modal();
-        modal.closeModal();
     }
 
     taskFilter(taskList, taskId) {
         return taskList.find(item => item.getId() === taskId)
     }
 
-    updateTask(idTask, newTask){
+    updateTask(idTask, newTask, idBoard){
         const taskService = new TaskService();
-        taskService.updateTaskById(idTask,newTask);
+        taskService.updateTaskById(idTask,newTask, idBoard);
     }
-    typeRequest(operation, id, newTask){
+    typeRequest(operation, id, newTask, idBoard){
         if (newTask.name !== "" && operation === "create") {            
             this.createTask(id, newTask)
         }else if(operation === "update") {
-            this.updateTask(id, newTask)
+            this.updateTask(id, newTask, idBoard)
         }
     }
     
-    deleteTask(idTaks){
+    deleteTask(idTaks, idBoard){       
         Swal.fire({
             title: '¿Desea eliminar la tarea?',
             icon: 'warning',
@@ -87,9 +84,7 @@ export class TaskController {
         .then((result) => {
             if (result.isConfirmed) {
                 const taskService = new TaskService();
-                taskService.deleteTaskById(idTaks);
-                const modal = new Modal();
-                modal.closeModal();
+                taskService.deleteTaskById(idTaks, idBoard);
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',

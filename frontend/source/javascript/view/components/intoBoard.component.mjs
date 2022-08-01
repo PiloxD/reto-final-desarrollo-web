@@ -4,14 +4,14 @@ export class IntoBoard {
     #board
     #idBoard
 
-    constructor(board) {
+    constructor(board) {       
         this.#board = board;
         this.#idBoard = board.getId();
     }
 
-
     showBoard() {
         const $mainContainer = document.querySelector('#container');
+        $mainContainer.innerHTML = ` `;
         const navbar = new Navbar();
         const nav = navbar.get();
         const $main = document.createElement('div');
@@ -81,4 +81,5 @@ export class IntoBoard {
         const taskController = new TaskController();        
         taskController.showForm(idBoard, "create");
     }
+
 }

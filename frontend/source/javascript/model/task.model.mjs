@@ -5,17 +5,21 @@ export class TaskModel {
     #deliveryDate;
     #logForTask
     #idColumn
+    #idBoard;
 
-    constructor(id, name, description, deliveryDate, logForTask, idColumn) {
+    constructor(id, name, description, deliveryDate, logForTask, idColumn, idBoard) {
         this.#taskdId = id;
         this.#name = name;
         this.#description = description;
         this.#deliveryDate = deliveryDate;
         this.#logForTask = logForTask;
         this.#idColumn = idColumn;
+        this.#idBoard = idBoard;
     }
 
     getId() { return this.#taskdId; }
+    
+    getIdBoard() { return this.#idBoard; }
 
     getName() { return this.#name; }
 

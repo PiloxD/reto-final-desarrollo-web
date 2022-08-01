@@ -15,8 +15,8 @@ export class ListTasks {
 
     getList(data) {
         data.map(item => {
-            const { id, name, description, deliveryDate, logForTask, idColumn } = item;
-            this.#addTask(new TaskModel(id, name, description, deliveryDate, logForTask, idColumn));
+            const { id, name, description, deliveryDate, logForTask, idColumn, idBoard } = item;
+            this.#addTask(new TaskModel(id, name, description, deliveryDate, logForTask, idColumn, idBoard));
         });
         return this.#listTasks;
     }

@@ -1,4 +1,7 @@
 import { Config } from '../../config.mjs'
+import { BoardView } from '../../view/board.view.mjs';
+import { BoardModel } from '../board.model.mjs';
+import { BoardService } from './board.service.mjs';
 
 
 export class TaskService {
@@ -36,14 +39,21 @@ export class TaskService {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
+        }).then(async () => {
+            const board = new BoardService();
+            const data = await board.getBoardById(idBoard);
+            const responseData = data.data;
+            const boardUpdate = new BoardModel(responseData.id, responseData.name);
+            new BoardView().init(boardUpdate);
+        });
+
     }
 
     // PUT Actualizar una tarea por su ID
-    updateTaskById(idTask, newTask) {
+    updateTaskById(idTask, newTask, idBoard) {
         const {name, description, deliveryDate} = newTask;
         
-        return fetch(`${Config.API_URL}task/${idTask}`, {
+        fetch(`${Config.API_URL}task/${idTask}`, {
             method: 'PUT',
             body: JSON.stringify({
                 "name": name,
@@ -53,14 +63,25 @@ export class TaskService {
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
+        }).then(async () => {
+            const board = new BoardService();
+            const data = await board.getBoardById(idBoard);
+            const responseData = data.data;
+            const boardUpdate = new BoardModel(responseData.id, responseData.name);
+            new BoardView().init(boardUpdate);
+        });
+        
     }
 
     // DELETE Elimina una tarea por su ID
-    deleteTaskById = (id) => {
+    deleteTaskById = (id, idBoard) => {
         axios.delete(`${Config.API_URL}task/${id}`)
-            .then(function (response) {
-                console.log(response);
+            .then( async () => {
+                const board = new BoardService();                
+                const data = await board.getBoardById(idBoard);
+                const responseData = data.data;
+                const boardUpdate = new BoardModel(responseData.id, responseData.name);
+                new BoardView().init(boardUpdate);
             })
             .catch(function (error) {
                 console.log(error);
