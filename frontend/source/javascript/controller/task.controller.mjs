@@ -16,9 +16,9 @@ export class TaskController {
         const data = response.data;
         const listTask = new ListTasks();
         this.#allTasks = await listTask.getList(data);
-        return this.#allTasks
-
+        return this.#allTasks;
     }
+
     moveTask(idColumn, idTaks) {
         const taskService = new TaskService();
         taskService.getAndMoveTask(idColumn, idTaks);
@@ -26,8 +26,15 @@ export class TaskController {
 
     showForm(id, operation) {
         const form = new TaskForm();
-        const modal = new Modal();
-        modal.showModal(form.get());
+        //const modal = new Modal();
+        //modal.showModal(form.get());
+        Swal.fire({
+            html:
+            form.get(),
+            cancelButtonText:
+              '<i class="fa fa-thumbs-down"></i>',
+            cancelButtonAriaLabel: 'Thumbs down'
+        })
         const $buttonForm = document.getElementById("form-button");
         $buttonForm.addEventListener("click", () => this.getData(id, operation));
     }
@@ -48,26 +55,19 @@ export class TaskController {
     }
 
     createTask(idBoard, newTask) {
-        console.log("create Task");
         const taskService = new TaskService();
         taskService.createTask(idBoard, newTask);
         const modal = new Modal();
         modal.closeModal();
     }
-    taskFilter(taskList, taskId) {
-        return taskList.filter(item => item.getId() === taskId)
-    }
 
-    deleteTask(idTaks){
-       const taskService = new TaskService();
-       taskService.deleteTaskById(idTaks);
+    taskFilter(taskList, taskId) {
+        return taskList.find(item => item.getId() === taskId)
     }
 
     updateTask(idTask, newTask){
         const taskService = new TaskService();
         taskService.updateTaskById(idTask,newTask);
-        const modal = new Modal();
-        modal.closeModal();
     }
     typeRequest(operation, id, newTask){
         if (newTask.name !== "" && operation === "create") {            
@@ -76,5 +76,37 @@ export class TaskController {
             this.updateTask(id, newTask)
         }
     }
-
+    
+    deleteTask(idTaks){
+        Swal.fire({
+            title: '¿Desea eliminar la tarea?',
+            icon: 'warning',
+            confirmButtonText: 'Continuar.',
+            showCloseButton:true,
+            cancelButtonText: 'Cancelar.',            
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                const taskService = new TaskService();
+                taskService.deleteTaskById(idTaks);
+                const modal = new Modal();
+                modal.closeModal();
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully',
+                })
+            } 
+        })
+    }
 }
