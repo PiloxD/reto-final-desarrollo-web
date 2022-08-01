@@ -100,7 +100,8 @@ export class TaskController {
             this.createTask(id, newTask)
         }else if(operation === "update") {
             this.updateTask(id, newTask, idBoard)
-
+        }
+    }
     /**
      * Actualiza una tarea
      * @param {*} idTask ID de la tarea a actualizar
@@ -113,9 +114,9 @@ export class TaskController {
 
     typeRequest(operation, id, newTask) {
         if (newTask.name !== "" && operation === "create") {
-            this.createTask(id, newTask);
+            this.createTask(id, newTask)
         } else if (operation === "update") {
-            this.updateTask(id, newTask);
+            this.updateTask(id, newTask)
         }
     }
     
